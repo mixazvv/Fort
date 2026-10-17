@@ -17,8 +17,6 @@ using { /Verse.org/Random }
 bodycam_match_state := struct:
     RoundNumber : int = 1
     Scores : []int = array{0, 0}
-    # Выбранное снаряжение каждого игрока, чтобы меню между раундами помнило выбор.
-    Loadouts : [player]int = map{}
 
 var BodycamMatchStates : weak_map(session, bodycam_match_state) = map{}
 
@@ -36,14 +34,21 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
 
     # --- Необязательные устройства (можно оставить пустыми) ---
 
-    # Наборы снаряжения на выбор (как в Bodycam: основное + пистолет).
-    # В каждом Item Granter включите очистку инвентаря при выдаче.
+    # Арсенал: из него выдаётся собранное игроком снаряжение.
     @editable
-    LoadoutGranters : []item_granter_device = array{}
+    Arsenal : bodycam_arsenal_device = bodycam_arsenal_device{}
 
-    # Названия наборов для меню, в том же порядке, что LoadoutGranters.
+    # Лобби «Брифинг» перед первым раундом. Если не настроено, сразу идёт подготовка.
     @editable
-    LoadoutNames : []string = array{}
+    Lobby : bodycam_lobby_device = bodycam_lobby_device{}
+
+    # Стартовые позиции команд на карте (можно использовать выключенные Player Spawner).
+    # Каждый раунд игроки переносятся сюда из брифинга.
+    @editable
+    TeamSpawnsA : []player_spawner_device = array{}
+
+    @editable
+    TeamSpawnsB : []player_spawner_device = array{}
 
     # Короткое замедление после попадания (Movement Modulator: 0.6 на 1 с).
     @editable
@@ -74,7 +79,7 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
     @editable
     RoundsToWin : int = 5
 
-    # Подготовка: стоим на месте и выбираем снаряжение.
+    # Подготовка перед раундами со 2-го: стоим на месте и собираем снаряжение.
     @editable
     PrepSeconds : int = 15
 
@@ -109,7 +114,6 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
     var Agents : [player]bodycam_agent = map{}
     var Alive : [player]logic = map{}
     var Scores : []int = array{0, 0}
-    var SavedLoadouts : [player]int = map{}
     var RoundNumber : int = 1
     var InPrep : logic = true
     var RoundOver : logic = false
@@ -143,10 +147,7 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
             InjuredHealthFraction := InjuredHealthFraction
             HeavyBreathingAfterSeconds := HeavyBreathingAfterSeconds
             SignalLostSeconds := SignalLostSeconds
-        Picker := bodycam_loadout_picker{Player := P, Names := LoadoutNames}
-        if (Saved := SavedLoadouts[P]):
-            set Picker.Selected = Saved
-        BodycamAgent := bodycam_agent{Player := P, Mode := Self, Feel := Feel, Overlay := Overlay, Picker := Picker}
+        BodycamAgent := bodycam_agent{Player := P, Mode := Self, Feel := Feel, Overlay := Overlay}
         if (set Agents[P] = BodycamAgent) {}
         Overlay.Show()
 
@@ -208,26 +209,30 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
     # ---------- Ход раунда ----------
 
     RunRound()<suspends>:void =
-        # 1. Подготовка: все стоят на месте и могут только осматриваться.
+        # 1. Перед первым раундом — брифинг, перед остальными — подготовка со сборкой снаряжения.
         set InPrep = true
-        for (P -> BodycamAgent : Agents):
-            BodycamAgent.Picker.Open("СНАРЯЖЕНИЕ")
-        BroadcastCenter("РАУНД {RoundNumber}\n{ScoreLine()}", 4.0)
-        var Remaining : int = PrepSeconds
-        loop:
-            if (Remaining <= 0):
-                break
-            SetStatusForAll("ПОДГОТОВКА  ·  {FormatTimer(Remaining)}")
-            Sleep(1.0)
-            set Remaining -= 1
+        if (RoundNumber = 1, Lobby.IsConfigured()?):
+            Lobby.RunLobby(Arsenal, "РАУНДЫ 5×5")
+        else:
+            for (P -> BodycamAgent : Agents):
+                Arsenal.OpenMenu(P, "РАУНД {RoundNumber}  ·  СНАРЯЖЕНИЕ", false)
+            var Remaining : int = PrepSeconds
+            loop:
+                if (Remaining <= 0):
+                    break
+                Arsenal.SetStatusAll("{ScoreLine()}  ·  ВЫЕЗД ЧЕРЕЗ {FormatTimer(Remaining)}")
+                SetStatusForAll("ПОДГОТОВКА  ·  {FormatTimer(Remaining)}")
+                Sleep(1.0)
+                set Remaining -= 1
+            Arsenal.CloseAll()
 
-        # 2. Бой.
+        # 2. Бой: команды на позиции, снаряжение в руки.
         set InPrep = false
-        for (P -> BodycamAgent : Agents):
-            BodycamAgent.Picker.Close()
-            GrantLoadout(P, BodycamAgent.Picker.Selected)
         for (P -> BodycamAgent : Agents, Character := P.GetFortCharacter[]):
             Character.ReleaseFromStasis()
+        MoveTeamsToSpawns()
+        for (P -> BodycamAgent : Agents):
+            Arsenal.Grant(P)
         for (Sound : RoundStartSounds):
             Sound.Play()
         BroadcastCenter("ВПЕРЁД", 1.5)
@@ -316,11 +321,15 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
             if (Old := Scores[WinnerTeam], set Scores[WinnerTeam] = Old + 1) {}
             RoundEndedEvent.Signal()
 
-    GrantLoadout(P:player, Index:int):void =
-        if (Granter := LoadoutGranters[Index]):
-            Granter.GrantItem(P)
-        else if (Granter := LoadoutGranters[0]):
-            Granter.GrantItem(P)
+    # Каждого игрока — на свободную стартовую позицию его команды.
+    MoveTeamsToSpawns():void =
+        var Counters : []int = array{0, 0}
+        for (P -> BodycamAgent : Agents, P.IsActive[]):
+            TeamIndex := GetTeamIndex(P)
+            Spawns := if (TeamIndex = 0) then TeamSpawnsA else TeamSpawnsB
+            if (Count := Counters[TeamIndex], Spawn := Spawns[Mod[Count, Spawns.Length]]):
+                TeleportToDevice(P, Spawn)
+                if (set Counters[TeamIndex] = Count + 1) {}
 
     # ---------- Звук ----------
 
@@ -356,11 +365,7 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
         if (State := BodycamMatchStates[GetSession()]):
             set RoundNumber = State.RoundNumber
             set Scores = State.Scores
-            set SavedLoadouts = State.Loadouts
 
     SaveMatchState():void =
-        var Loadouts : [player]int = SavedLoadouts
-        for (P -> BodycamAgent : Agents):
-            if (set Loadouts[P] = BodycamAgent.Picker.Selected) {}
-        NewState := bodycam_match_state{RoundNumber := RoundNumber + 1, Scores := Scores, Loadouts := Loadouts}
+        NewState := bodycam_match_state{RoundNumber := RoundNumber + 1, Scores := Scores}
         if (set BodycamMatchStates[GetSession()] = NewState) {}

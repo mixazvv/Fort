@@ -392,6 +392,11 @@ PROPS = [
     ("OSB_3", 440, 250, 1, 50, 240, "T_OSB_Plywood"),
 ]
 
+# Брифинг (лобби): прямоугольник в юнитах UEFN (x0, y0, x1, y1) к востоку от карты.
+LOBBY_RECT = (9000.0, 1500.0, 11000.0, 2900.0)
+# Точки для спавнов лобби (x, y) — между скамейками.
+LOBBY_SPAWNS = [(9450 + col * 260, 1850 + row * 260) for row in range(3) for col in (0, 1, 2, 3)][:10]
+
 SODIUM = (255, 150, 60)
 FLUO = (220, 240, 255)
 # (подпись, x, y в px, высота, цвет, сила, радиус, мерцающая)
@@ -477,6 +482,24 @@ def warehouse_boxes():
     for label, x, y, w, d, h, mat in PROPS:
         add(label, "Cover", mat, uu(x + w / 2), uu(y + d / 2), h / 2, max(w * PX, 12.0), max(d * PX, 12.0), h)
 
+    # Брифинг (лобби): закрытое здание к востоку от карты. Отсюда игроков переносят на карту.
+    x0, y0, x1, y1 = LOBBY_RECT
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    w, d = x1 - x0, y1 - y0
+    add("Lobby_Floor", "Lobby", "T_Concrete_Floor", cx, cy, -8.0, w, d, 20.0)
+    add("Lobby_Roof", "Lobby", CORRUGATED, cx, cy, FLOOR_H + 10.0, w, d, 20.0)
+    add("Lobby_Wall_N", "Lobby", "T_OSB_Plywood", cx, y0, FLOOR_H / 2, w, WALL_T, FLOOR_H)
+    add("Lobby_Wall_S", "Lobby", "T_OSB_Plywood", cx, y1, FLOOR_H / 2, w, WALL_T, FLOOR_H)
+    add("Lobby_Wall_W", "Lobby", "T_OSB_Plywood", x0, cy, FLOOR_H / 2, WALL_T, d, FLOOR_H)
+    add("Lobby_Wall_E", "Lobby", "T_Plaster_Worn", x1, cy, FLOOR_H / 2, WALL_T, d, FLOOR_H)
+    for i in range(10):  # шкафчики вдоль северной стены
+        add("Lobby_Locker", "Lobby", "T_Painted_Metal", x0 + 260 + i * 105, y0 + 45, 100.0, 95.0, 60.0, 200.0)
+    for row in range(3):  # скамейки
+        add("Lobby_Bench", "Lobby", "T_Wood_Planks", cx - 250, y0 + 520 + row * 260, 23.0, 600.0, 45.0, 45.0)
+    add("Lobby_Table", "Lobby", "T_Wood_Planks", x1 - 450, cy, 40.0, 140.0, 420.0, 80.0)
+    add("Lobby_Board", "Lobby", DRYWALL, x1 - 18, cy, 210.0, 6.0, 640.0, 300.0)
+    for k in (-1, 1):  # оружейные стойки у западной стены
+        add("Lobby_Rack", "Lobby", "T_Wood_Planks", x0 + 40, cy + k * 380, 90.0, 50.0, 320.0, 180.0)
     return boxes
 
 
@@ -493,8 +516,12 @@ def warehouse_block(cube):
 
 
 def lights_actors():
-    return "".join(light_actor(label, "Lights/Flicker" if flicker else "Lights", uu(x), uu(y), z, color, intensity, radius)
+    text = "".join(light_actor(label, "Lights/Flicker" if flicker else "Lights", uu(x), uu(y), z, color, intensity, radius)
                    for label, x, y, z, color, intensity, radius, flicker in LIGHTS)
+    x0, y0, x1, y1 = LOBBY_RECT
+    for i, fx in enumerate((0.25, 0.5, 0.75)):
+        text += light_actor(f"Lamp_Lobby_{i + 1}", "Lights/Lobby", x0 + (x1 - x0) * fx, (y0 + y1) / 2, 340.0, FLUO, 20, 1400)
+    return text
 
 
 def lights_block():

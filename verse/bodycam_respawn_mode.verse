@@ -6,6 +6,7 @@ using { /Fortnite.com/Devices }
 using { /Fortnite.com/Characters }
 using { /Fortnite.com/Playspaces }
 using { /Verse.org/Simulation }
+using { /Verse.org/Random }
 
 bodycam_respawn_mode := class(creative_device, bodycam_mode):
 
@@ -15,9 +16,18 @@ bodycam_respawn_mode := class(creative_device, bodycam_mode):
     @editable
     EndGame : end_game_device = end_game_device{}
 
-    # Все Player Spawner карты. По их событиям оружие и здоровье выдаются при каждом возрождении.
+    # Все Player Spawner на карте (не в лобби). По их событиям оружие и здоровье выдаются при каждом
+    # возрождении. Пока идёт лобби, они выключены.
     @editable
     Spawners : []player_spawner_device = array{}
+
+    # Арсенал: из него выдаётся собранное игроком снаряжение.
+    @editable
+    Arsenal : bodycam_arsenal_device = bodycam_arsenal_device{}
+
+    # Лобби «Брифинг». Если не настроено, матч стартует сразу.
+    @editable
+    Lobby : bodycam_lobby_device = bodycam_lobby_device{}
 
     # --- Необязательные устройства ---
 
@@ -75,13 +85,15 @@ bodycam_respawn_mode := class(creative_device, bodycam_mode):
     var Agents : [player]bodycam_agent = map{}
     var NextUnitNumber : int = 1
     var MatchOver : logic = false
+    var MatchStarted : logic = false
 
     # --- Что определяет конкретный режим ---
 
     # Устройства Fortnite не могут быть абстрактными, поэтому здесь пустые реализации по умолчанию.
 
-    # Выдать оружие при возрождении.
-    GrantForPlayer(P:player):void = {}
+    # Выдать оружие при возрождении. По умолчанию — снаряжение из арсенала.
+    GrantForPlayer(P:player):void =
+        Arsenal.Grant(P)
     # Засчитать убийство. Режим сам вызывает FinishMatch, если кто-то победил.
     OnKill(Killer:player, Victim:player):void = {}
     # Смерть без убийцы: падение, самоподрыв.
@@ -101,19 +113,30 @@ bodycam_respawn_mode := class(creative_device, bodycam_mode):
         set NextUnitNumber += 1
         Callsign
 
-    # Названия наборов для меню выбора. Пусто — меню не показывается.
-    PickerOptions():[]string = array{}
+    # Открывать ли арсенал на экране смерти (в «Гонке вооружений» оружие выдаёт сама гонка).
+    UsesArsenal()<transacts>:logic = true
 
     # Текст на экране конца матча.
     WinnerText(Winner:player):string = "ЛУЧШИЙ: {CallsignOf(Winner)}"
 
     OnBegin<override>()<suspends>:void =
-        for (Spawner : Spawners):
-            Spawner.SpawnedEvent.Subscribe(OnSpawned)
         GetPlayspace().PlayerAddedEvent().Subscribe(OnPlayerAdded)
 
-        Sleep(0.5)
+        # Лобби: спавны карты выключены, игроки собирают снаряжение в брифинге.
+        if (Lobby.IsConfigured()?):
+            for (Spawner : Spawners):
+                Spawner.Disable()
+            Lobby.RunLobby(Arsenal, ModeTitle())
+
+        # Матч: включаем спавны карты и переносим туда всех из лобби.
+        for (Spawner : Spawners):
+            Spawner.Enable()
+            Spawner.SpawnedEvent.Subscribe(OnSpawned)
+        set MatchStarted = true
+        Sleep(0.2)
         for (P : GetPlayspace().GetPlayers()):
+            if (Lobby.IsConfigured()?, Spawner := Spawners[GetRandomInt(0, Spawners.Length - 1)]):
+                TeleportToDevice(P, Spawner)
             HandleSpawn(P)
 
         BroadcastCenter("{ModeTitle()}\nСМЕНА НАЧАЛАСЬ", 4.0)
@@ -136,16 +159,15 @@ bodycam_respawn_mode := class(creative_device, bodycam_mode):
                 InjuredHealthFraction := InjuredHealthFraction
                 HeavyBreathingAfterSeconds := HeavyBreathingAfterSeconds
                 SignalLostSeconds := SignalLostSeconds
-            Picker := bodycam_loadout_picker{Player := P, Names := PickerOptions()}
-            BodycamAgent := bodycam_agent{Player := P, Mode := Self, Feel := Feel, Overlay := Overlay, Picker := Picker}
+            BodycamAgent := bodycam_agent{Player := P, Mode := Self, Feel := Feel, Overlay := Overlay}
             if (set Agents[P] = BodycamAgent) {}
             Overlay.Show()
 
     HandleSpawn(P:player):void =
         EnsurePlayer(P)
-        if (BodycamAgent := Agents[P], Character := P.GetFortCharacter[]):
+        if (MatchStarted?, BodycamAgent := Agents[P], Character := P.GetFortCharacter[]):
             BodycamAgent.Bind(Character)
-            BodycamAgent.Picker.Close()
+            Arsenal.CloseMenu(P)
             BodycamAgent.OnRespawned()
             Character.SetMaxHealth(MaxHealth)
             Character.SetHealth(MaxHealth)
@@ -171,8 +193,8 @@ bodycam_respawn_mode := class(creative_device, bodycam_mode):
             else:
                 OnSuicide(Victim.Player)
             RefreshStatus()
-            if (not MatchOver?):
-                Victim.Picker.Open("СНАРЯЖЕНИЕ · СЛЕДУЮЩАЯ ЖИЗНЬ")
+            if (not MatchOver?, UsesArsenal()?):
+                Arsenal.OpenMenu(Victim.Player, "СНАРЯЖЕНИЕ · СЛЕДУЮЩАЯ ЖИЗНЬ", false)
 
     OnAgentHit<override>(Victim:bodycam_agent):void =
         for (Modulator : HitSlowModulators):
@@ -214,8 +236,7 @@ bodycam_respawn_mode := class(creative_device, bodycam_mode):
             spawn{ RunMatchEnd(Winner) }
 
     RunMatchEnd(Winner:player)<suspends>:void =
-        for (P -> BodycamAgent : Agents):
-            BodycamAgent.Picker.Close()
+        Arsenal.CloseAll()
         BroadcastCenter("КОНЕЦ СМЕНЫ\n{WinnerText(Winner)}", ResultScreenSeconds)
         Sleep(ResultScreenSeconds)
         EndGame.Activate(Winner)
@@ -223,13 +244,6 @@ bodycam_respawn_mode := class(creative_device, bodycam_mode):
     BroadcastCenter(Text:string, Duration:float):void =
         for (P -> BodycamAgent : Agents):
             spawn{ BodycamAgent.Overlay.ShowCenter(Text, Duration) }
-
-    # Выдать набор, выбранный в меню (по умолчанию первый).
-    GrantSelected(P:player, Granters:[]item_granter_device):void =
-        if (BodycamAgent := Agents[P], Granter := Granters[BodycamAgent.Picker.Selected]):
-            Granter.GrantItem(P)
-        else if (Granter := Granters[0]):
-            Granter.GrantItem(P)
 
     # Игрок с наибольшим значением Score. Используется режимами для лидера и победителя по времени.
     FindLeader(Score:[player]int)<transacts>:?player =

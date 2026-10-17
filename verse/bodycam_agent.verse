@@ -10,7 +10,6 @@ bodycam_agent := class:
     Mode : bodycam_mode
     Feel : bodycam_feel
     Overlay : bodycam_overlay
-    Picker : bodycam_loadout_picker
 
     var SprintStartTime : float = 0.0
     var IsInjured : logic = false

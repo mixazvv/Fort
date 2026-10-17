@@ -9,14 +9,6 @@ using { /Verse.org/Simulation }
 
 bodycam_tdm_manager := class(bodycam_respawn_mode):
 
-    # Наборы снаряжения на выбор. В каждом Item Granter включите очистку инвентаря при выдаче.
-    @editable
-    LoadoutGranters : []item_granter_device = array{}
-
-    # Названия наборов для меню, в том же порядке, что LoadoutGranters.
-    @editable
-    LoadoutNames : []string = array{}
-
     @editable
     ScoreToWin : int = 50
 
@@ -24,11 +16,6 @@ bodycam_tdm_manager := class(bodycam_respawn_mode):
     var TeamCounters : []int = array{0, 0}
 
     ModeTitle<override>():string = "КОМАНДНЫЙ БОЙ"
-
-    PickerOptions<override>():[]string = LoadoutNames
-
-    GrantForPlayer<override>(P:player):void =
-        GrantSelected(P, LoadoutGranters)
 
     GetTeamIndex(InAgent:agent)<transacts>:int =
         TeamCollection := GetPlayspace().GetTeamCollection()
