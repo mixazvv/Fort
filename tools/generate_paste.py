@@ -641,8 +641,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--cube", default="/Engine/BasicShapes/Cube.Cube",
                         help="путь к мешу-кубу 100×100×100 (правый клик по мешу → Copy Reference)")
-    parser.add_argument("--project-root", default="/invaliddomain/MyProject",
-                        help="корень проекта в панели ресурсов (как в журнале сообщений UEFN)")
+    parser.add_argument("--project-root", default="/MyProject",
+                        help="корень проекта (правый клик по текстуре → «Копировать ссылку»)")
     parser.add_argument("--out", type=Path, default=Path(__file__).resolve().parent.parent / "paste")
     args = parser.parse_args()
 
