@@ -1,0 +1,252 @@
+      Begin Actor Class=/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C Name=Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341 Archetype="/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C'/CreativeCoreDevices/Device_ItemGranter_V2.Default__Device_ItemGranter_V2_C'" ActorFolderPath="None" ExportPath="/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341'"
+         Begin Object Class=/Script/FortniteGame.BaseBuildingStaticMeshComponent Name="StaticMeshComponent0" Archetype="/Script/FortniteGame.BaseBuildingStaticMeshComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Default__Device_ItemGranter_V2_C:StaticMeshComponent0'" ExportPath="/Script/FortniteGame.BaseBuildingStaticMeshComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.StaticMeshComponent0'"
+         End Object
+         Begin Object Class=/Script/Engine.BoxComponent Name="BoundingBoxComponent" Archetype="/Script/Engine.BoxComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Default__Device_ItemGranter_V2_C:BoundingBoxComponent'" ExportPath="/Script/Engine.BoxComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.BoundingBoxComponent'"
+         End Object
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="EditorOnlyStaticMeshComponent" Archetype="/Script/Engine.StaticMeshComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Default__Device_ItemGranter_V2_C:EditorOnlyStaticMeshComponent'" ExportPath="/Script/Engine.StaticMeshComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.EditorOnlyStaticMeshComponent'"
+         End Object
+         Begin Object Class=/Game/Items/Traps/Blueprints/Toys/ToyOptionsComponent.ToyOptionsComponent_C Name="ToyOptionsComponent" Archetype="/Game/Items/Traps/Blueprints/Toys/ToyOptionsComponent.ToyOptionsComponent_C'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:ToyOptionsComponent_GEN_VARIABLE'" ExportPath="/Game/Items/Traps/Blueprints/Toys/ToyOptionsComponent.ToyOptionsComponent_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.ToyOptionsComponent'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortMinigameProgressComponent Name="FortMinigameProgress" Archetype="/Script/FortniteGame.FortMinigameProgressComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:FortMinigameProgress_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortMinigameProgressComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.FortMinigameProgress'"
+         End Object
+         Begin Object Class=/Game/Creative/Devices/Common/Components/Creative_VisibleInGame_Component.Creative_VisibleInGame_Component_C Name="VisibleInGameComponent" Archetype="/Game/Creative/Devices/Common/Components/Creative_VisibleInGame_Component.Creative_VisibleInGame_Component_C'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:VisibleInGameComponent_GEN_VARIABLE'" ExportPath="/Game/Creative/Devices/Common/Components/Creative_VisibleInGame_Component.Creative_VisibleInGame_Component_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.VisibleInGameComponent'"
+         End Object
+         Begin Object Class=/Script/Engine.BoxComponent Name="DropBox" Archetype="/Script/Engine.BoxComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:DropBox_GEN_VARIABLE'" ExportPath="/Script/Engine.BoxComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.DropBox'"
+         End Object
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="LightRays" Archetype="/Script/Engine.StaticMeshComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:LightRays_GEN_VARIABLE'" ExportPath="/Script/Engine.StaticMeshComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.LightRays'"
+         End Object
+         Begin Object Class=/Script/Engine.PointLightComponent Name="PointLight" Archetype="/Script/Engine.PointLightComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:PointLight_GEN_VARIABLE'" ExportPath="/Script/Engine.PointLightComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PointLight'"
+         End Object
+         Begin Object Class=/Script/Engine.SceneComponent Name="PreviewMeshScene" Archetype="/Script/Engine.SceneComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:PreviewMeshScene_GEN_VARIABLE'" ExportPath="/Script/Engine.SceneComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PreviewMeshScene'"
+         End Object
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="PreviewStaticMesh" Archetype="/Script/Engine.StaticMeshComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:PreviewStaticMesh_GEN_VARIABLE'" ExportPath="/Script/Engine.StaticMeshComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PreviewStaticMesh'"
+         End Object
+         Begin Object Class=/Script/Engine.SkeletalMeshComponent Name="PreviewSkeletalMesh" Archetype="/Script/Engine.SkeletalMeshComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:PreviewSkeletalMesh_GEN_VARIABLE'" ExportPath="/Script/Engine.SkeletalMeshComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PreviewSkeletalMesh'"
+         End Object
+         Begin Object Class=/Script/Engine.AudioComponent Name="Holo Loop Cue" Archetype="/Script/Engine.AudioComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:Holo Loop Cue_GEN_VARIABLE'" ExportPath="/Script/Engine.AudioComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.Holo Loop Cue'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortGameplayReceiverMessageComponent Name="EnableWhenReceived" Archetype="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:EnableWhenReceived_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.EnableWhenReceived'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortGameplayReceiverMessageComponent Name="DisableWhenReceived" Archetype="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:DisableWhenReceived_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.DisableWhenReceived'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortGameplayReceiverMessageComponent Name="GrantItemWhenReceived" Archetype="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:GrantItemWhenReceived_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.GrantItemWhenReceived'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortGameplayReceiverMessageComponent Name="PreviousItemWhenReceived" Archetype="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:PreviousItemWhenReceived_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PreviousItemWhenReceived'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortGameplayReceiverMessageComponent Name="NextItemWhenReceived" Archetype="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:NextItemWhenReceived_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.NextItemWhenReceived'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortGameplayReceiverMessageComponent Name="RandomItemWhenReceived" Archetype="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:RandomItemWhenReceived_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.RandomItemWhenReceived'"
+         End Object
+         Begin Object Class=/Game/Creative/Devices/CaptureArea/PickupItemListComponent.PickupItemListComponent_C Name="PickupItemList" Archetype="/Game/Creative/Devices/CaptureArea/PickupItemListComponent.PickupItemListComponent_C'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:PickupItemList_GEN_VARIABLE'" ExportPath="/Game/Creative/Devices/CaptureArea/PickupItemListComponent.PickupItemListComponent_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PickupItemList'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortGameplayReceiverMessageComponent Name="RestockItemsWhenReceived" Archetype="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:RestockItemsWhenReceived_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.RestockItemsWhenReceived'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortGameplayTriggerMessageComponent Name="WhenItemGrantedTrigger" Archetype="/Script/FortniteGame.FortGameplayTriggerMessageComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:WhenItemGrantedTrigger_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortGameplayTriggerMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.WhenItemGrantedTrigger'"
+         End Object
+         Begin Object Class=/Game/Creative/Devices/Common/Components/Creative_ItemPreview_Component.Creative_ItemPreview_Component_C Name="Creative_ItemPreview_Component" Archetype="/Game/Creative/Devices/Common/Components/Creative_ItemPreview_Component.Creative_ItemPreview_Component_C'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:Creative_ItemPreview_Component_GEN_VARIABLE'" ExportPath="/Game/Creative/Devices/Common/Components/Creative_ItemPreview_Component.Creative_ItemPreview_Component_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.Creative_ItemPreview_Component'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortCreativePersistenceComponentBase Name="FortCreativePersistenceComponentBase" Archetype="/Script/FortniteGame.FortCreativePersistenceComponentBase'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:FortCreativePersistenceComponentBase_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortCreativePersistenceComponentBase'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.FortCreativePersistenceComponentBase'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortGameplayReceiverMessageComponent Name="ClearSaveDataWhenReceived" Archetype="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:ClearSaveDataWhenReceived_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.ClearSaveDataWhenReceived'"
+         End Object
+         Begin Object Class=/Script/FortniteGame.FortCreativeItemVariantNotifierComponent Name="ItemVariantNotifier" Archetype="/Script/FortniteGame.FortCreativeItemVariantNotifierComponent'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:ItemVariantNotifier_GEN_VARIABLE'" ExportPath="/Script/FortniteGame.FortCreativeItemVariantNotifierComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.ItemVariantNotifier'"
+         End Object
+         Begin Object Class=/Game/Creative/Devices/Common/Components/Creative_UseRestriction_Component.Creative_UseRestriction_Component_C Name="Creative_UseRestriction_Component" Archetype="/Game/Creative/Devices/Common/Components/Creative_UseRestriction_Component.Creative_UseRestriction_Component_C'/CreativeCoreDevices/Device_ItemGranter_V2.Device_ItemGranter_V2_C:Creative_UseRestriction_Component_GEN_VARIABLE'" ExportPath="/Game/Creative/Devices/Common/Components/Creative_UseRestriction_Component.Creative_UseRestriction_Component_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.Creative_UseRestriction_Component'"
+         End Object
+         Begin Object Name="StaticMeshComponent0" ExportPath="/Script/FortniteGame.BaseBuildingStaticMeshComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.StaticMeshComponent0'"
+            OverrideMaterials(0)="/Script/Engine.MaterialInstanceDynamic'/Engine/Transient.MID_M_TeamSelect_Spawner_05_1'"
+            CachedMaxDrawDistance=2800.000000
+            BodyInstance=(CollisionEnabled=NoCollision,CollisionProfileName="Custom",MaxAngularVelocity=3599.999756)
+            RelativeLocation=(X=-792.000000,Y=648.000000,Z=0.000000)
+            RelativeRotation=(Pitch=0.000000,Yaw=-90.000000,Roll=0.000000)
+            bHiddenInGame=True
+         End Object
+         Begin Object Name="BoundingBoxComponent" ExportPath="/Script/Engine.BoxComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.BoundingBoxComponent'"
+            CachedMaxDrawDistance=2800.000000
+            AttachParent="StaticMeshComponent0"
+         End Object
+         Begin Object Name="EditorOnlyStaticMeshComponent" ExportPath="/Script/Engine.StaticMeshComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.EditorOnlyStaticMeshComponent'"
+            CachedMaxDrawDistance=2800.000000
+            AttachParent="StaticMeshComponent0"
+         End Object
+         Begin Object Name="ToyOptionsComponent" ExportPath="/Game/Items/Traps/Blueprints/Toys/ToyOptionsComponent.ToyOptionsComponent_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.ToyOptionsComponent'"
+            PlayerOptionData=(PropertyOverrides=((PropertyName="bEquipGrantedItem",PropertyData="False"),(PropertyName="bGrantOnGameStart",PropertyData="False"),(PropertyName="bGrantOnTimer",PropertyData="False"),(PropertyName="CycleBehavior",PropertyData="Stop"),(PropertyName="DropItemsAtPlayerLocation",PropertyData="If Inventory Full"),(PropertyName="EnabledOnGameStart",PropertyData="True"),(PropertyName="Grant",PropertyData="All Items"),(PropertyName="GrantCondition",PropertyData="Always"),(PropertyName="GrantOnCycle",PropertyData="True"),(PropertyName="GrantTime",PropertyData="1.000000"),(PropertyName="GrantWhileOffline",PropertyData="False"),(PropertyName="InitialWeaponAmmo"),(PropertyName="ItemCount"),(PropertyName="ItemToGrant",PropertyData="1"),(PropertyName="LabelOverride",PropertyData="Устройство выдачи предметов"),(PropertyName="OnGrantAction",PropertyData="Clear Inventory"),(PropertyName="OwnershipOfDroppedItem",PropertyData="Receiving Player"),(PropertyName="PlayAudio",PropertyData="False"),(PropertyName="ReceivingPlayers",PropertyData="(TeamType=TriggeringPlayer,TeamIndex=1)"),(PropertyName="RemoveItemOnGrant",PropertyData="False"),(PropertyName="SpareWeaponAmmo")))
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="FortMinigameProgress" ExportPath="/Script/FortniteGame.FortMinigameProgressComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.FortMinigameProgress'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="VisibleInGameComponent" ExportPath="/Game/Creative/Devices/Common/Components/Creative_VisibleInGame_Component.Creative_VisibleInGame_Component_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.VisibleInGameComponent'"
+            VisibleSceneComponents(0)="StaticMeshComponent0"
+            Visibility Components with Collision=(("/Script/Engine.StaticMeshComponent'TRASH_StaticMeshComponent_19'", NoCollision),("StaticMeshComponent0", QueryAndPhysics),("/Script/Engine.PointLightComponent'TRASH_PointLightComponent_9'", NoCollision),("/Script/Engine.StaticMeshComponent'TRASH_StaticMeshComponent_18'", NoCollision),("/Script/Engine.SkeletalMeshComponent'TRASH_SkeletalMeshComponent_9'", NoCollision),("/Script/Engine.AudioComponent'TRASH_AudioComponent_9'", NoCollision))
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="DropBox" ExportPath="/Script/Engine.BoxComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.DropBox'"
+            CachedMaxDrawDistance=2800.000000
+            AttachParent="StaticMeshComponent0"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="LightRays" ExportPath="/Script/Engine.StaticMeshComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.LightRays'"
+            CachedMaxDrawDistance=2800.000000
+            AttachParent="StaticMeshComponent0"
+            bHiddenInGame=False
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="PointLight" ExportPath="/Script/Engine.PointLightComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PointLight'"
+            MaxDrawDistance=2800.000000
+            MaxDistanceFadeRange=2048.000000
+            VolumetricScatteringIntensity=0.000000
+            AttachParent="LightRays"
+            bHiddenInGame=False
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="PreviewMeshScene" ExportPath="/Script/Engine.SceneComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PreviewMeshScene'"
+            AttachParent="StaticMeshComponent0"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="PreviewStaticMesh" ExportPath="/Script/Engine.StaticMeshComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PreviewStaticMesh'"
+            CachedMaxDrawDistance=2800.000000
+            AttachParent="PreviewMeshScene"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="PreviewSkeletalMesh" ExportPath="/Script/Engine.SkeletalMeshComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PreviewSkeletalMesh'"
+            CachedMaxDrawDistance=2800.000000
+            AttachParent="PreviewMeshScene"
+            bHiddenInGame=True
+            PrimaryComponentTick=(EndTickGroup=TG_PostPhysics)
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="Holo Loop Cue" ExportPath="/Script/Engine.AudioComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.Holo Loop Cue'"
+            AttachParent="StaticMeshComponent0"
+            bHiddenInGame=True
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="EnableWhenReceived" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.EnableWhenReceived'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="DisableWhenReceived" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.DisableWhenReceived'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="GrantItemWhenReceived" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.GrantItemWhenReceived'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="PreviousItemWhenReceived" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PreviousItemWhenReceived'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="NextItemWhenReceived" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.NextItemWhenReceived'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="RandomItemWhenReceived" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.RandomItemWhenReceived'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="PickupItemList" ExportPath="/Game/Creative/Devices/CaptureArea/PickupItemListComponent.PickupItemListComponent_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.PickupItemList'"
+            ItemListData(0)=(ItemDefinition="/ChronoWeaponGameplay/Items/PanRifle/WID_Assault_Chrono_Pan_Rifle_Athena_C.WID_Assault_Chrono_Pan_Rifle_Athena_C")
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="RestockItemsWhenReceived" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.RestockItemsWhenReceived'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="WhenItemGrantedTrigger" ExportPath="/Script/FortniteGame.FortGameplayTriggerMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.WhenItemGrantedTrigger'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="Creative_ItemPreview_Component" ExportPath="/Game/Creative/Devices/Common/Components/Creative_ItemPreview_Component.Creative_ItemPreview_Component_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.Creative_ItemPreview_Component'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="FortCreativePersistenceComponentBase" ExportPath="/Script/FortniteGame.FortCreativePersistenceComponentBase'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.FortCreativePersistenceComponentBase'"
+            PersistenceID=3302860B44C41A08938AC5870C5DFBB6
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="ClearSaveDataWhenReceived" ExportPath="/Script/FortniteGame.FortGameplayReceiverMessageComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.ClearSaveDataWhenReceived'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="ItemVariantNotifier" ExportPath="/Script/FortniteGame.FortCreativeItemVariantNotifierComponent'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.ItemVariantNotifier'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Begin Object Name="Creative_UseRestriction_Component" ExportPath="/Game/Creative/Devices/Common/Components/Creative_UseRestriction_Component.Creative_UseRestriction_Component_C'/a2c82de4-2bf7-42cb-b302-6bd94410f9ae/MyProject.MyProject:PersistentLevel.Device_ItemGranter_V2_C_UAID_40C73C33DC6C100C03_2088964341.Creative_UseRestriction_Component'"
+            UCSSerializationIndex=0
+            bNetAddressable=True
+            CreationMethod=SimpleConstructionScript
+         End Object
+         Creative_UseRestriction_Component="Creative_UseRestriction_Component"
+         ItemVariantNotifier="ItemVariantNotifier"
+         ClearSaveDataWhenReceived="ClearSaveDataWhenReceived"
+         FortCreativePersistenceComponentBase="FortCreativePersistenceComponentBase"
+         Creative_ItemPreview_Component="Creative_ItemPreview_Component"
+         WhenItemGrantedTrigger="WhenItemGrantedTrigger"
+         RestockItemsWhenReceived="RestockItemsWhenReceived"
+         PickupItemList="PickupItemList"
+         RandomItemWhenReceived="RandomItemWhenReceived"
+         NextItemWhenReceived="NextItemWhenReceived"
+         PreviousItemWhenReceived="PreviousItemWhenReceived"
+         PreviewSkeletalMesh="PreviewSkeletalMesh"
+         PointLight="PointLight"
+         GrantItemWhenReceived="GrantItemWhenReceived"
+         DisableWhenReceived="DisableWhenReceived"
+         EnableWhenReceived="EnableWhenReceived"
+         Holo Loop Cue="Holo Loop Cue"
+         PreviewStaticMesh="PreviewStaticMesh"
+         PreviewMeshScene="PreviewMeshScene"
+         LightRays="LightRays"
+         DropBox="DropBox"
+         InitialWeaponAmmo=3
+         Grant=NewEnumerator1
+         VisibleInGameComponent="VisibleInGameComponent"
+         FortMinigameProgress="FortMinigameProgress"
+         ToyOptionsComponent="ToyOptionsComponent"
+         TimeOfDayControlledLightDataArray(0)=(LightComponent="PointLight",Position=(X=-791.999931,Y=648.000001,Z=85.664684),InitialIntensity=8.000000)
+         StaticMeshComponent="StaticMeshComponent0"
+         BoxComponent="BoundingBoxComponent"
+         EditorOnlyStaticMeshComponent="EditorOnlyStaticMeshComponent"
+         CullDistance=2800.000000
+         PlaysetPackagePathName="/CreativeCoreDevices/SetupAssets/PID_Device_ItemGranter"
+         SavedActorGuid=CA13FA17475363EAF7DE769F56C5EB37
+         LabelOverride="G_AR"
+         RootComponent="StaticMeshComponent0"
+         ActorLabel="G_AR"
+      End Actor

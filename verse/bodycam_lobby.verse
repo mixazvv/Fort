@@ -12,8 +12,9 @@ using { /Fortnite.com/Playspaces }
 using { /UnrealEngine.com/Temporary/SpatialMath }
 using { /Verse.org/Simulation }
 
-# Перенести игрока к устройству (например, к спавну на карте) с его поворотом.
-TeleportToDevice(P:player, Target:creative_device):void =
+# Перенести игрока к спавну на карте с его поворотом.
+# Встроенные устройства Fortnite не наследуются от creative_device, поэтому тип параметра — сам спавнер.
+TeleportToDevice(P:player, Target:player_spawner_device):void =
     if (Character := P.GetFortCharacter[]):
         Transform := Target.GetTransform()
         if (Character.TeleportTo[Transform.Translation, Transform.Rotation]) {}
