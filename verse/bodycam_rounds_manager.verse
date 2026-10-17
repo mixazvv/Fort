@@ -1,4 +1,4 @@
-# BODYCAM для Fortnite: менеджер матча.
+# BODYCAM для Fortnite: режим «Раунды» (командный, без возрождений).
 # 5 на 5, раунды, одна жизнь за раунд. Раунд выигрывает команда, которая
 # уничтожила соперников, а по истечении времени та, у которой больше живых (потом больше здоровья).
 # Матч выигрывает команда, первой взявшая RoundsToWin раундов.
@@ -20,7 +20,7 @@ bodycam_match_state := struct:
 
 var BodycamMatchStates : weak_map(session, bodycam_match_state) = map{}
 
-bodycam_game_manager := class(creative_device):
+bodycam_rounds_manager := class(creative_device, bodycam_mode):
 
     # --- Обязательные устройства ---
 
@@ -126,7 +126,11 @@ bodycam_game_manager := class(creative_device):
 
     SetupPlayer(P:player, Callsign:string):void =
         Overlay := bodycam_overlay{Player := P, Callsign := Callsign, CameraModel := CameraModel, DateStamp := DateStamp}
-        BodycamAgent := bodycam_agent{Player := P, Manager := Self, Overlay := Overlay}
+        Feel := bodycam_feel:
+            InjuredHealthFraction := InjuredHealthFraction
+            HeavyBreathingAfterSeconds := HeavyBreathingAfterSeconds
+            SignalLostSeconds := SignalLostSeconds
+        BodycamAgent := bodycam_agent{Player := P, Mode := Self, Feel := Feel, Overlay := Overlay}
         if (set Agents[P] = BodycamAgent) {}
         Overlay.Show()
 
@@ -245,7 +249,9 @@ bodycam_game_manager := class(creative_device):
             Sleep(1.0)
             set Remaining -= 1
 
-    HandleEliminated(P:player, Callsign:string):void =
+    OnAgentEliminated<override>(Victim:bodycam_agent, Killer:?agent):void =
+        P := Victim.Player
+        Callsign := Victim.Callsign()
         if (set Alive[P] = false) {}
         TeamIndex := GetTeamIndex(P)
         for (Mate -> BodycamAgent : Agents, Mate <> P, GetTeamIndex(Mate) = TeamIndex):
@@ -297,13 +303,11 @@ bodycam_game_manager := class(creative_device):
 
     # ---------- Звук ----------
 
-    PlayInjured(P:player):void =
-        for (Sound : InjuredSounds):
-            Sound.Play(P)
+    OnAgentInjured<override>(Victim:bodycam_agent):void =
+        PlaySoundsFor(InjuredSounds, Victim.Player)
 
-    PlayBreathing(P:player):void =
-        for (Sound : BreathingSounds):
-            Sound.Play(P)
+    OnAgentWinded<override>(Victim:bodycam_agent):void =
+        PlaySoundsFor(BreathingSounds, Victim.Player)
 
     # ---------- Оверлей ----------
 

@@ -36,6 +36,7 @@ bodycam_overlay := class:
     var ClockSeconds : int = 0
     var CenterToken : int = 0
     var RadioToken : int = 0
+    var SignalToken : int = 0
     var IsRecording : logic = true
     var MaybeRoot : ?canvas = false
 
@@ -165,8 +166,23 @@ bodycam_overlay := class:
         TimeText.SetVisibility(Visibility)
         LensText.SetVisibility(Visibility)
 
+    # Возрождение: запись снова идёт, экран чистый.
+    ResetForRespawn():void =
+        set SignalToken += 1
+        set IsRecording = true
+        RecText.SetText(BodycamText("● REC"))
+        NoSignalBackground.SetVisibility(widget_visibility.Collapsed)
+        NoSignalText.SetVisibility(widget_visibility.Collapsed)
+        HitFlash.SetOpacity(0.0)
+        GlitchFlash.SetOpacity(0.0)
+        SetInjured(false)
+        SetCameraHudVisible(true)
+
     # Камера «дёргается», запись останавливается, экран чернеет с надписью «НЕТ СИГНАЛА».
+    # Если игрок возродился раньше, чем истекло время, ResetForRespawn уже всё вернул.
     ShowSignalLost(Seconds:float)<suspends>:void =
+        set SignalToken += 1
+        MyToken := SignalToken
         set IsRecording = false
         GlitchFlash.SetOpacity(0.6)
         Sleep(0.05)
@@ -182,7 +198,8 @@ bodycam_overlay := class:
         NoSignalBackground.SetVisibility(widget_visibility.Visible)
         NoSignalText.SetVisibility(widget_visibility.Visible)
         Sleep(Seconds)
-        NoSignalBackground.SetVisibility(widget_visibility.Collapsed)
-        NoSignalText.SetVisibility(widget_visibility.Collapsed)
-        # Дальше игрок наблюдает за союзниками, служебные надписи камеры ему уже не нужны.
-        SetCameraHudVisible(false)
+        if (SignalToken = MyToken):
+            NoSignalBackground.SetVisibility(widget_visibility.Collapsed)
+            NoSignalText.SetVisibility(widget_visibility.Collapsed)
+            # Дальше игрок наблюдает или ждёт возрождения, служебные надписи камеры не нужны.
+            SetCameraHudVisible(false)

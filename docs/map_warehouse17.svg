@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 640" width="720" height="640" font-family="Consolas, 'DejaVu Sans Mono', monospace">
+  <title>Склад 17: план карты BODYCAM</title>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#3a4048" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="stairs" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M0 8L8 0" stroke="#9aa4ae" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="720" height="640" fill="#15181c"/>
+  <text x="40" y="26" fill="#e8e6df" font-size="15" font-weight="bold">СКЛАД 17  ·  план, вид сверху</text>
+  <text x="680" y="26" fill="#8b949e" font-size="11" text-anchor="end">1 клетка = 512 юнитов (5,12 м)</text>
+
+  <!-- Зоны -->
+  <rect x="40" y="40" width="160" height="480" fill="#22291f"/>
+  <rect x="200" y="40" width="280" height="80" fill="#2b2620"/>
+  <rect x="200" y="120" width="280" height="320" fill="#24262c"/>
+  <rect x="200" y="440" width="280" height="80" fill="#1f2530"/>
+  <rect x="480" y="40" width="200" height="480" fill="#2c2424"/>
+  <rect x="40" y="40" width="640" height="480" fill="url(#grid)"/>
+
+  <!-- Антресоль и лестницы -->
+  <rect x="204" y="124" width="272" height="34" fill="none" stroke="#9aa4ae" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="340" y="146" fill="#9aa4ae" font-size="11" text-anchor="middle">антресоль, 2 этаж</text>
+  <rect x="440" y="160" width="40" height="40" fill="url(#stairs)"/>
+  <rect x="200" y="360" width="40" height="40" fill="url(#stairs)"/>
+
+  <!-- Стеллажи -->
+  <g fill="#6b5a3e">
+    <rect x="250" y="170" width="20" height="70"/>
+    <rect x="250" y="320" width="20" height="80"/>
+    <rect x="330" y="170" width="20" height="70"/>
+    <rect x="330" y="320" width="20" height="80"/>
+    <rect x="410" y="210" width="20" height="30"/>
+    <rect x="410" y="320" width="20" height="80"/>
+  </g>
+  <!-- Укрытия во дворе и на рампе -->
+  <g fill="#4d5a66">
+    <rect x="110" y="70" width="70" height="26"/>
+    <rect x="140" y="230" width="30" height="100"/>
+    <rect x="150" y="430" width="26" height="70"/>
+    <rect x="300" y="60" width="50" height="22"/>
+    <rect x="270" y="465" width="60" height="16"/>
+    <rect x="360" y="490" width="16" height="22"/>
+  </g>
+
+  <!-- Офисы: коридор и комнаты -->
+  <rect x="560" y="40" width="40" height="480" fill="#332b2b"/>
+
+  <!-- Стены -->
+  <g stroke="#c9ccd1" stroke-width="3" fill="none" stroke-linecap="square">
+    <rect x="40" y="40" width="640" height="480"/>
+    <path d="M200 40V60M200 100V260M200 300V470M200 500V520"/>
+    <path d="M200 120H245M275 120H325M355 120H405M435 120H480"/>
+    <path d="M200 440H325M355 440H480"/>
+    <path d="M480 40V60M480 100V205M480 235V325M480 355V470M480 500V520"/>
+    <path d="M560 40V90M560 120V250M560 280V420M560 450V520"/>
+    <path d="M600 40V100M600 130V230M600 260V390M600 420V520"/>
+    <path d="M480 200H560M480 360H560M600 200H680M600 360H680"/>
+  </g>
+
+  <!-- Двери и проёмы -->
+  <g stroke="#e0a43a" stroke-width="5">
+    <path d="M200 62V98M200 262V298M200 472V498"/>
+    <path d="M247 120H273M327 120H353M407 120H433"/>
+    <path d="M327 440H353"/>
+    <path d="M480 62V98M480 207V233M480 327V353M480 472V498"/>
+    <path d="M560 92V118M560 252V278M560 422V448"/>
+    <path d="M600 102V128M600 232V258M600 392V418"/>
+  </g>
+
+  <!-- Подписи зон -->
+  <g fill="#e8e6df" font-size="12" text-anchor="middle">
+    <text x="120" y="190">ДВОР</text>
+    <text x="120" y="204" font-size="10" fill="#8b949e">погрузка, грузовик</text>
+    <text x="340" y="108">РАМПА</text>
+    <text x="340" y="290">ЦЕХ</text>
+    <text x="340" y="304" font-size="10" fill="#8b949e">стеллажи, 2 этажа</text>
+    <text x="300" y="508">КОТЕЛЬНАЯ</text>
+    <text x="520" y="130">ОФИС</text>
+    <text x="520" y="290">СЕРВЕРНАЯ</text>
+    <text x="520" y="450">АРХИВ</text>
+    <text x="640" y="80">КАБИНЕТ</text>
+    <text x="640" y="222">РАЗДЕВАЛКА</text>
+    <text x="640" y="450">ОТДЫХ</text>
+    <text x="580" y="290" font-size="10" fill="#8b949e" transform="rotate(-90 580 290)">коридор</text>
+  </g>
+
+  <!-- Свет -->
+  <g fill="#f3d36b">
+    <circle cx="186" cy="56" r="5"/>
+    <circle cx="186" cy="506" r="5"/>
+    <circle cx="420" cy="72" r="5"/>
+    <circle cx="300" cy="190" r="5"/>
+    <circle cx="580" cy="160" r="5"/>
+    <circle cx="640" cy="348" r="5"/>
+  </g>
+  <g fill="#ff7a3a">
+    <circle cx="380" cy="360" r="5"/>
+    <circle cx="420" cy="500" r="5"/>
+    <circle cx="580" cy="400" r="5"/>
+  </g>
+
+  <!-- Спавны ALPHA -->
+  <g fill="#4a90e2" stroke="#15181c" stroke-width="1.5">
+    <circle cx="65" cy="215" r="8"/>
+    <circle cx="95" cy="215" r="8"/>
+    <circle cx="80" cy="280" r="8"/>
+    <circle cx="65" cy="345" r="8"/>
+    <circle cx="95" cy="345" r="8"/>
+  </g>
+  <!-- Спавны BRAVO -->
+  <g fill="#e24a4a" stroke="#15181c" stroke-width="1.5">
+    <circle cx="620" cy="248" r="8"/>
+    <circle cx="660" cy="248" r="8"/>
+    <circle cx="640" cy="292" r="8"/>
+    <circle cx="620" cy="335" r="8"/>
+    <circle cx="660" cy="335" r="8"/>
+  </g>
+  <!-- Спавны DM / Гонка вооружений -->
+  <g fill="#d8d8d8" stroke="#15181c" stroke-width="1">
+    <path d="M70 72l7 7-7 7-7-7z"/>
+    <path d="M60 470l7 7-7 7-7-7z"/>
+    <path d="M230 68l7 7-7 7-7-7z"/>
+    <path d="M460 68l7 7-7 7-7-7z"/>
+    <path d="M300 260l7 7-7 7-7-7z"/>
+    <path d="M380 180l7 7-7 7-7-7z"/>
+    <path d="M300 410l7 7-7 7-7-7z"/>
+    <path d="M460 480l7 7-7 7-7-7z"/>
+    <path d="M520 70l7 7-7 7-7-7z"/>
+    <path d="M520 470l7 7-7 7-7-7z"/>
+    <path d="M660 110l7 7-7 7-7-7z"/>
+    <path d="M660 400l7 7-7 7-7-7z"/>
+  </g>
+
+  <!-- Легенда -->
+  <g font-size="11" fill="#c9ccd1">
+    <circle cx="48" cy="552" r="6" fill="#4a90e2"/><text x="60" y="556">спавн ALPHA</text>
+    <circle cx="158" cy="552" r="6" fill="#e24a4a"/><text x="170" y="556">спавн BRAVO</text>
+    <path d="M268 546l6 6-6 6-6-6z" fill="#d8d8d8"/><text x="280" y="556">спавн DM / гонка</text>
+    <circle cx="410" cy="552" r="5" fill="#f3d36b"/><text x="420" y="556">лампа</text>
+    <circle cx="478" cy="552" r="5" fill="#ff7a3a"/><text x="488" y="556">мерцающая лампа</text>
+    <path d="M42 580H58" stroke="#e0a43a" stroke-width="5"/><text x="66" y="584">дверь / проём</text>
+    <rect x="170" y="574" width="16" height="12" fill="#6b5a3e"/><text x="194" y="584">стеллаж</text>
+    <rect x="262" y="574" width="16" height="12" fill="#4d5a66"/><text x="286" y="584">укрытие</text>
+    <rect x="362" y="574" width="16" height="12" fill="url(#stairs)"/><text x="386" y="584">лестница</text>
+    <path d="M458 580H486" stroke="#9aa4ae" stroke-width="1.5" stroke-dasharray="6 4"/><text x="494" y="584">антресоль</text>
+    <text x="40" y="614" fill="#8b949e">Сетка 16 × 12 клеток ≈ 82 × 61 м. Север сверху.</text>
+  </g>
+</svg>
