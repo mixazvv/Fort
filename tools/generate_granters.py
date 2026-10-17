@@ -61,6 +61,8 @@ def make_granter(template, index, label, primary):
     text = re.sub(r"Position=\(X=[^)]*\)",
                   "Position=(X=%.6f,Y=%.6f,Z=%.6f)" % (x, y, FLOOR_Z + LIGHT_HEIGHT), text)
 
+    # Временный материал редактора из образца: при вставке это недействительная ссылка.
+    text = re.sub(r"\n\s*OverrideMaterials\(0\)=\"[^\"]*/Engine/Transient\.[^\n]*", "", text)
     # Уникальные идентификаторы UEFN выдаст сам.
     text = re.sub(r"\n\s*PersistenceID=\w+", "", text)
     text = re.sub(r"\n\s*SavedActorGuid=\w+", "", text)
