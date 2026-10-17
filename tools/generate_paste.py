@@ -144,8 +144,8 @@ def pin(pin_id, name, direction_out, links, default=None):
 MATERIAL = "M_Fisheye"
 
 
-def node_text(n, nodes_by_name):
-    graph = f"/Engine/Transient.{MATERIAL}:MaterialGraph_0"
+def node_text(n, nodes_by_name, material=MATERIAL):
+    graph = f"/Engine/Transient.{material}:MaterialGraph_0"
     node_path = f"/Script/UnrealEd.MaterialGraphNode'{graph}.{n.name}'"
     expr_path = f"/Script/Engine.MaterialExpression{n.cls}'{graph}.{n.name}.{n.expr}'"
     lines = [f'Begin Object Class=/Script/UnrealEd.MaterialGraphNode Name="{n.name}" ExportPath="{node_path}"']
@@ -162,7 +162,7 @@ def node_text(n, nodes_by_name):
     lines.append(f"      MaterialExpressionEditorX={n.x}")
     lines.append(f"      MaterialExpressionEditorY={n.y}")
     lines.append(f"      MaterialExpressionGuid={guid()}")
-    lines.append(f'      Material="/Script/UnrealEd.PreviewMaterial\'/Engine/Transient.{MATERIAL}\'"')
+    lines.append(f'      Material="/Script/UnrealEd.PreviewMaterial\'/Engine/Transient.{material}\'"')
     lines.append("   End Object")
     lines.append(f'   MaterialExpression="/Script/Engine.MaterialExpression{n.cls}\'{n.expr}\'"')
     lines.append(f"   NodePosX={n.x}")
@@ -290,6 +290,35 @@ def lens_block():
 
     by_name = {n.name: n for n in nodes}
     return "\n".join(node_text(n, by_name) for n in nodes) + "\n"
+
+
+# ---------------------------------------------------------------- 2б. мастер-материал склада
+
+MASTER = "M_Warehouse_Master"
+# Имена параметров как у материалов, которые UEFN создаёт при импорте OBJ, — после смены
+# родителя у экземпляров T_* их текстуры подхватятся сами.
+MASTER_TEXTURES = (("BaseColorMap", "BaseColor", None),
+                   ("NormalMap", "Normal", "SAMPLERTYPE_Normal"),
+                   ("RoughnessMap", "Roughness", "SAMPLERTYPE_LinearColor"))
+
+
+def master_block(project_root):
+    """Узлы M_Warehouse_Master: три текстуры и металличность. Импорт OBJ ссылается на материал
+    плагина Interchange, который UEFN не пропускает при проверке; этот материал его заменяет."""
+    nodes = []
+    for i, (param, suffix, sampler) in enumerate(MASTER_TEXTURES):
+        tex = f"{project_root}/Warehouse17/TEX_T_Concrete_Floor_{suffix}"
+        props = [f'ParameterName="{param}"',
+                 f"ExpressionGUID={guid()}",
+                 f"Texture=\"/Script/Engine.Texture2D'{tex}.TEX_T_Concrete_Floor_{suffix}'\""]
+        if sampler:
+            props.append(f"SamplerType={sampler}")
+        nodes.append(Node(i, "TextureSampleParameter2D", -600, i * 320, props,
+                          inputs=("UVs",), outputs=("RGB", "R", "G", "B", "A", "RGBA")))
+    nodes.append(Node(len(nodes), "ScalarParameter", -400, len(nodes) * 320,
+                      ['ParameterName="Metallic"', f"ExpressionGUID={guid()}"], inputs=()))
+    by_name = {n.name: n for n in nodes}
+    return "\n".join(node_text(n, by_name, MASTER) for n in nodes) + "\n"
 
 
 # ---------------------------------------------------------------- 3. коробка карты
@@ -612,6 +641,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--cube", default="/Engine/BasicShapes/Cube.Cube",
                         help="путь к мешу-кубу 100×100×100 (правый клик по мешу → Copy Reference)")
+    parser.add_argument("--project-root", default="/invaliddomain/MyProject",
+                        help="корень проекта в панели ресурсов (как в журнале сообщений UEFN)")
     parser.add_argument("--out", type=Path, default=Path(__file__).resolve().parent.parent / "paste")
     args = parser.parse_args()
 
@@ -620,6 +651,7 @@ def main():
     (args.out / "02_fisheye_nodes.txt").write_text(lens_block(), encoding="utf-8")
     (args.out / "03_warehouse17.txt").write_text(warehouse_block(args.cube), encoding="utf-8")
     (args.out / "04_lights.txt").write_text(lights_block(), encoding="utf-8")
+    (args.out / "09_warehouse_master_nodes.txt").write_text(master_block(args.project_root), encoding="utf-8")
     map_dir = args.out.parent / "map"
     map_dir.mkdir(exist_ok=True)
     obj, mtl = warehouse_obj()
