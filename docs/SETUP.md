@@ -220,7 +220,6 @@ First Person Camera, HUD Controller, Post Process Volume и туман таки�
 - **`round_settings_device.EndRound`**: если метода нет, используйте второе `end_game_device` в режиме *End: Round* и вызывайте `.Activate(P)`.
 - **`audio_player_device.Play(Agent)`**: если перегрузки нет, используйте `Play()` и настройте устройство так, чтобы звук был позиционным у игрока.
 - **`SprintedEvent`**: если у `fort_character` нет этого события, удалите подписку в `bodycam_agent.verse`. Одышка просто пропадёт.
-- **Абстрактный класс** `bodycam_respawn_mode`: если UEFN не принимает `class<abstract>` от `creative_device`, уберите `<abstract>` и дайте методам `GrantForPlayer`, `OnKill` и остальным пустые тела (`= {}`, а для возвращающих значение `= false` или `= ""`).
 - **Меню снаряжения** (`bodycam_loadout_picker.verse`): если не находится `stack_box` или `button_loud`, проверьте `using { /UnrealEngine.com/Temporary/UI }` и `using { /Fortnite.com/UI }`. Если `set Picker.Selected = Saved` ругается на доступ к полю, добавьте в класс метод `SetSelected(I:int):void = set Selected = I`.
 - **`GetSession()`**: если не находится, проверьте `using { /Verse.org/Simulation }`.
 - Ошибки про эффекты (`<transacts>`, `<decides>`): обычно лечатся оборачиванием вызова в `if (...) {}`.

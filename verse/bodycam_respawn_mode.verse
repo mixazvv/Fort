@@ -7,7 +7,7 @@ using { /Fortnite.com/Characters }
 using { /Fortnite.com/Playspaces }
 using { /Verse.org/Simulation }
 
-bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
+bodycam_respawn_mode := class(creative_device, bodycam_mode):
 
     # --- Обязательные устройства ---
 
@@ -78,18 +78,20 @@ bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
 
     # --- Что определяет конкретный режим ---
 
+    # Устройства Fortnite не могут быть абстрактными, поэтому здесь пустые реализации по умолчанию.
+
     # Выдать оружие при возрождении.
-    GrantForPlayer(P:player):void
+    GrantForPlayer(P:player):void = {}
     # Засчитать убийство. Режим сам вызывает FinishMatch, если кто-то победил.
-    OnKill(Killer:player, Victim:player):void
+    OnKill(Killer:player, Victim:player):void = {}
     # Смерть без убийцы: падение, самоподрыв.
-    OnSuicide(Victim:player):void
+    OnSuicide(Victim:player):void = {}
     # Строка статуса вверху экрана (без таймера).
-    StatusFor(P:player):string
+    StatusFor(P:player):string = ""
     # Кто победил, если время вышло.
-    TimeUpWinner():?player
+    TimeUpWinner():?player = false
     # Название режима для заставки.
-    ModeTitle():string
+    ModeTitle():string = "BODYCAM"
 
     # --- Что режим может переопределить ---
 
@@ -107,7 +109,7 @@ bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
 
     OnBegin<override>()<suspends>:void =
         for (Spawner : Spawners):
-            Spawner.SpawnedEvent().Subscribe(OnSpawned)
+            Spawner.SpawnedEvent.Subscribe(OnSpawned)
         GetPlayspace().PlayerAddedEvent().Subscribe(OnPlayerAdded)
 
         Sleep(0.5)
@@ -230,7 +232,7 @@ bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
             Granter.GrantItem(P)
 
     # Игрок с наибольшим значением Score. Используется режимами для лидера и победителя по времени.
-    FindLeader(Score:[player]int):?player =
+    FindLeader(Score:[player]int)<transacts>:?player =
         var Leader : ?player = false
         var Best : int = -1
         for (P -> Value : Score, P.IsActive[], Value > Best):

@@ -5,6 +5,7 @@
 using { /Fortnite.com/Devices }
 using { /Fortnite.com/Playspaces }
 using { /Fortnite.com/Teams }
+using { /Verse.org/Simulation }
 
 bodycam_tdm_manager := class(bodycam_respawn_mode):
 
@@ -29,7 +30,7 @@ bodycam_tdm_manager := class(bodycam_respawn_mode):
     GrantForPlayer<override>(P:player):void =
         GrantSelected(P, LoadoutGranters)
 
-    GetTeamIndex(InAgent:agent):int =
+    GetTeamIndex(InAgent:agent)<transacts>:int =
         TeamCollection := GetPlayspace().GetTeamCollection()
         var Result : int = -1
         for (Index -> Team : TeamCollection.GetTeams(), TeamCollection.IsOnTeam[InAgent, Team]):
@@ -44,7 +45,7 @@ bodycam_tdm_manager := class(bodycam_respawn_mode):
             if (set TeamCounters[TeamIndex] = Number) {}
         "{TeamCallsign(TeamIndex)}-{Number}"
 
-    TeamScore(TeamIndex:int):int =
+    TeamScore(TeamIndex:int)<transacts>:int =
         if (Value := TeamScores[TeamIndex]) then Value else 0
 
     AddTeamScore(TeamIndex:int, Delta:int):void =

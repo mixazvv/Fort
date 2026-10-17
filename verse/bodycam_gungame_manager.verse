@@ -4,6 +4,7 @@
 # Смерть без убийцы (падение, самоподрыв) откатывает на одно оружие назад.
 
 using { /Fortnite.com/Devices }
+using { /Verse.org/Simulation }
 
 bodycam_gungame_manager := class(bodycam_respawn_mode):
 
@@ -23,7 +24,7 @@ bodycam_gungame_manager := class(bodycam_respawn_mode):
 
     ModeTitle<override>():string = "ГОНКА ВООРУЖЕНИЙ"
 
-    GetLevel(P:player):int =
+    GetLevel(P:player)<transacts>:int =
         if (Value := Levels[P]) then Value else 0
 
     TierName(Level:int):string =
