@@ -294,6 +294,65 @@ def drywall(size, rng):
     return albedo, height, rough, 1.5
 
 
+def osb_plywood(size, rng):
+    """OSB-плита стен «килхауса» (как в тренировочном ангаре Bodycam): спрессованная щепа."""
+    color = Image.new("RGB", (size, size), (176, 140, 92))
+    height = Image.new("L", (size, size), 110)
+    dc, dh = ImageDraw.Draw(color), ImageDraw.Draw(height)
+    count = int(size * size / 700 * 2.2)
+    for _ in range(count):
+        x, y = rng.random() * size, rng.random() * size
+        length = rng.uniform(0.035, 0.11) * size
+        width = rng.uniform(0.008, 0.02) * size
+        angle = rng.uniform(0, math.pi)
+        ca, sa = math.cos(angle), math.sin(angle)
+        hx, hy, wx, wy = ca * length / 2, sa * length / 2, -sa * width / 2, ca * width / 2
+        tone = 1 + rng.normal(0, 0.09)
+        rgb = tuple(int(np.clip(c * tone, 0, 255)) for c in (182, 145, 95))
+        if rng.random() < 0.08:  # тёмные щепки
+            rgb = tuple(int(c * 0.65) for c in rgb)
+        h = int(np.clip(120 + rng.normal(0, 40), 0, 255))
+        for ox in (-size, 0, size):
+            for oy in (-size, 0, size):
+                cx, cy = x + ox, y + oy
+                if -length < cx < size + length and -length < cy < size + length:
+                    poly = [(cx - hx - wx, cy - hy - wy), (cx + hx - wx, cy + hy - wy),
+                            (cx + hx + wx, cy + hy + wy), (cx - hx + wx, cy - hy + wy)]
+                    dc.polygon(poly, fill=rgb)
+                    dh.polygon(poly, fill=h)
+    albedo = np.asarray(color, dtype=float) / 255
+    h = np.asarray(height, dtype=float) / 255
+    dirt = contrast(fbm(size, 3, rng, octaves=4), 0.5, 0.9)
+    scuffs = contrast(fbm(size, 8, rng, octaves=4, stretch=(4, 0.5)), 0.7, 0.85)
+    albedo = albedo * (1 - 0.18 * dirt[..., None]) * (1 - 0.2 * scuffs[..., None])
+    height = 0.4 + 0.5 * blur(h, 1)
+    rough = 0.78 + 0.1 * fbm(size, 16, rng, octaves=2)
+    return np.clip(albedo, 0, 1), height, rough, 3.0
+
+
+def plaster_worn(size, rng):
+    """Старая штукатурка подъезда: отслоения до бетона, подтёки, трещины, грязь."""
+    base = np.array((0.80, 0.76, 0.64))
+    concrete = np.array((0.50, 0.49, 0.46))
+    peel_field = fbm(size, 5, rng, octaves=6)
+    peel = contrast(peel_field, 0.64, 0.66)
+    peel_edge = np.clip(contrast(peel_field, 0.6, 0.64) - peel, 0, 1)
+    streaks = contrast(fbm(size, 5, rng, octaves=5, stretch=(6, 0.3)), 0.55, 0.85)
+    stains = contrast(fbm(size, 3, rng, octaves=4), 0.5, 0.85)
+    cracks = crack_lines(size, rng, cells=4, width=0.005, coverage=0.5)
+    speckle = fbm(size, 96, rng, octaves=2)
+
+    albedo = base[None, None, :] * (0.93 + 0.08 * speckle[..., None])
+    albedo = albedo * (1 - 0.25 * streaks[..., None] * np.array((0.8, 0.9, 1.2))[None, None, :])
+    albedo = albedo * (1 - 0.22 * stains[..., None])
+    albedo = albedo * (1 - 0.5 * peel_edge[..., None])
+    albedo = albedo * (1 - peel[..., None]) + concrete[None, None, :] * (0.85 + 0.2 * speckle[..., None]) * peel[..., None]
+    albedo = albedo * (1 - 0.6 * cracks[..., None])
+    height = 0.7 - 0.35 * peel + 0.05 * speckle - 0.3 * cracks
+    rough = 0.85 + 0.08 * peel
+    return np.clip(albedo, 0, 1), height, rough, 3.0
+
+
 MATERIALS = [
     ("T_Concrete_Floor", concrete_floor, "Пол цеха, рампы и котельной (4×4 м)"),
     ("T_Concrete_BlockWall", concrete_block_wall, "Стены цеха и котельной (2×2 м)"),
@@ -304,6 +363,8 @@ MATERIALS = [
     ("T_Wood_Planks", wood_planks, "Поддоны, ящики, стеллажи (1×1 м)"),
     ("T_Painted_Metal", painted_container_metal, "Контейнеры, котёл, шкафчики (2×2 м)"),
     ("T_Drywall", drywall, "Стены офисов (2×2 м)"),
+    ("T_OSB_Plywood", osb_plywood, "Перегородки «килхауса», щиты, укрытия (1,2×1,2 м)"),
+    ("T_Plaster_Worn", plaster_worn, "Стены коридоров, котельной, старых офисов (2×2 м)"),
 ]
 
 
@@ -406,6 +467,47 @@ def decal_sign(size, rng, title, subtitle, bg, fg, border):
     return rgba_from(img, alpha, rng, 0.08)
 
 
+def decal_graffiti(size, rng):
+    """Теги баллончиком и маркером, как на стенах в Bodycam: волнистые надписи, обводка, подтёки."""
+    w, h = size, size // 2
+    alpha = Image.new("L", (w, h), 0)
+    words = ["BWC", "NO COPS", "ZONE 17", "RAID", "SKLAD", "R.I.P.", "DMX", "KILLA"]
+    rng.shuffle(words)
+    slots = [(0.05, 0.05), (0.52, 0.08), (0.08, 0.52), (0.55, 0.55)]
+    for (sx, sy), word in zip(slots, words):
+        layer = Image.new("L", (w // 2, h // 2), 0)
+        d = ImageDraw.Draw(layer)
+        font_path = FONT_BOLD if rng.random() < 0.6 else FONT_MONO
+        font = fit_font(d, word, font_path, layer.width * 0.85, layer.height * 0.55)
+        box = d.textbbox((0, 0), word, font=font)
+        tx = (layer.width - (box[2] - box[0])) // 2 - box[0]
+        ty = (layer.height - (box[3] - box[1])) // 2 - box[1]
+        if rng.random() < 0.5:
+            d.text((tx, ty), word, font=font, fill=0, stroke_width=max(3, font.size // 18), stroke_fill=255)
+        else:
+            d.text((tx, ty), word, font=font, fill=255)
+        # Волна по горизонтали и наклон, чтобы буквы выглядели нарисованными от руки.
+        arr = np.asarray(layer, dtype=float)
+        rows = np.arange(arr.shape[0])
+        out = np.zeros_like(arr)
+        amp, freq, phase = rng.uniform(3, 9), rng.uniform(0.01, 0.025), rng.uniform(0, 6.28)
+        for x in range(arr.shape[1]):
+            shift = int(amp * math.sin(x * freq + phase))
+            out[:, x] = np.roll(arr[:, x], shift)
+        layer = Image.fromarray(out.astype(np.uint8)).rotate(rng.uniform(-9, 9), resample=Image.BICUBIC)
+        # Подтёки вниз от нижних краёв букв.
+        arr = np.asarray(layer, dtype=float)
+        d = ImageDraw.Draw(layer)
+        cols = np.where(arr.max(axis=0) > 200)[0]
+        for x in rng.choice(cols, size=min(len(cols), int(rng.integers(4, 9))), replace=False) if len(cols) else []:
+            bottom = np.where(arr[:, x] > 200)[0].max()
+            d.line([(x, bottom), (x, bottom + rng.uniform(15, 60))], fill=230, width=int(rng.integers(2, 5)))
+        alpha.paste(layer, (int(sx * w), int(sy * h)), layer)
+    alpha = alpha.filter(ImageFilter.GaussianBlur(1.0))
+    img = Image.new("RGB", (w, h), (24, 24, 28))
+    return rgba_from(img, alpha, rng, 0.15)
+
+
 def make_decals(size, rng):
     return [
         ("D_Hazard_Stripes", decal_hazard_stripes(size, rng), "Края рампы, колонны, ворота (тянется по горизонтали)"),
@@ -415,6 +517,7 @@ def make_decals(size, rng):
         ("D_Floor_Arrow", decal_arrow(size, rng), "Разметка на полу цеха и рампы"),
         ("D_Oil_Stain", decal_oil_stain(size, rng), "Пятна масла на бетоне и асфальте"),
         ("D_Sign_Caution", decal_sign(size, rng, "ОСТОРОЖНО!", "РАБОТАЕТ ПОГРУЗЧИК", (230, 185, 30), (20, 20, 20), (20, 20, 20)), "Цех, рампа"),
+        ("D_Graffiti_Tags", decal_graffiti(size, rng), "Стены коридоров, лестниц, котельной"),
         ("D_Sign_NoEntry", decal_sign(size, rng, "ПОСТОРОННИМ", "ВХОД ЗАПРЕЩЁН", (235, 235, 230), (175, 25, 25), (175, 25, 25)), "Двери офисов, серверная"),
     ]
 

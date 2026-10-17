@@ -1029,6 +1029,45 @@ Begin Map
          ActorLabel="Pipes_Boiler_079"
          FolderPath="Warehouse17/Cover"
       End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=OSB_1_080 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=3328.0,Y=2924.8,Z=120.0)
+            RelativeScale3D=(X=5.1200,Y=0.1280,Z=2.4000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="OSB_1_080"
+         FolderPath="Warehouse17/Cover"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=OSB_2_081 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=4352.0,Y=3206.4,Z=120.0)
+            RelativeScale3D=(X=5.1200,Y=0.1280,Z=2.4000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="OSB_2_081"
+         FolderPath="Warehouse17/Cover"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=OSB_3_082 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=5126.4,Y=3008.0,Z=120.0)
+            RelativeScale3D=(X=0.1280,Y=6.4000,Z=2.4000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="OSB_3_082"
+         FolderPath="Warehouse17/Cover"
+      End Actor
       Begin Actor Class=/Script/Engine.PointLight Name=Lamp_Yard_N Archetype=/Script/Engine.PointLight'/Script/Engine.Default__PointLight'
          Begin Object Class=/Script/Engine.PointLightComponent Name="LightComponent0" Archetype=/Script/Engine.PointLightComponent'/Script/Engine.Default__PointLight:LightComponent0'
          End Object

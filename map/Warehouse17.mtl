@@ -1,0 +1,98 @@
+newmtl T_Corrugated_Metal
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.70
+map_Kd ../textures/materials/T_Corrugated_Metal_BaseColor.jpg
+map_Bump ../textures/materials/T_Corrugated_Metal_Normal.png
+norm ../textures/materials/T_Corrugated_Metal_Normal.png
+map_Pr ../textures/materials/T_Corrugated_Metal_Roughness.jpg
+
+newmtl T_Concrete_BlockWall
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.00
+map_Kd ../textures/materials/T_Concrete_BlockWall_BaseColor.jpg
+map_Bump ../textures/materials/T_Concrete_BlockWall_Normal.png
+norm ../textures/materials/T_Concrete_BlockWall_Normal.png
+map_Pr ../textures/materials/T_Concrete_BlockWall_Roughness.jpg
+
+newmtl T_Plaster_Worn
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.00
+map_Kd ../textures/materials/T_Plaster_Worn_BaseColor.jpg
+map_Bump ../textures/materials/T_Plaster_Worn_Normal.png
+norm ../textures/materials/T_Plaster_Worn_Normal.png
+map_Pr ../textures/materials/T_Plaster_Worn_Roughness.jpg
+
+newmtl T_Drywall
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.00
+map_Kd ../textures/materials/T_Drywall_BaseColor.jpg
+map_Bump ../textures/materials/T_Drywall_Normal.png
+norm ../textures/materials/T_Drywall_Normal.png
+map_Pr ../textures/materials/T_Drywall_Roughness.jpg
+
+newmtl T_Asphalt
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.00
+map_Kd ../textures/materials/T_Asphalt_BaseColor.jpg
+map_Bump ../textures/materials/T_Asphalt_Normal.png
+norm ../textures/materials/T_Asphalt_Normal.png
+map_Pr ../textures/materials/T_Asphalt_Roughness.jpg
+
+newmtl T_Concrete_Floor
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.00
+map_Kd ../textures/materials/T_Concrete_Floor_BaseColor.jpg
+map_Bump ../textures/materials/T_Concrete_Floor_Normal.png
+norm ../textures/materials/T_Concrete_Floor_Normal.png
+map_Pr ../textures/materials/T_Concrete_Floor_Roughness.jpg
+
+newmtl T_Office_FloorTiles
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.00
+map_Kd ../textures/materials/T_Office_FloorTiles_BaseColor.jpg
+map_Bump ../textures/materials/T_Office_FloorTiles_Normal.png
+norm ../textures/materials/T_Office_FloorTiles_Normal.png
+map_Pr ../textures/materials/T_Office_FloorTiles_Roughness.jpg
+
+newmtl T_Diamond_Plate
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.70
+map_Kd ../textures/materials/T_Diamond_Plate_BaseColor.jpg
+map_Bump ../textures/materials/T_Diamond_Plate_Normal.png
+norm ../textures/materials/T_Diamond_Plate_Normal.png
+map_Pr ../textures/materials/T_Diamond_Plate_Roughness.jpg
+
+newmtl T_Painted_Metal
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.00
+map_Kd ../textures/materials/T_Painted_Metal_BaseColor.jpg
+map_Bump ../textures/materials/T_Painted_Metal_Normal.png
+norm ../textures/materials/T_Painted_Metal_Normal.png
+map_Pr ../textures/materials/T_Painted_Metal_Roughness.jpg
+
+newmtl T_Wood_Planks
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.00
+map_Kd ../textures/materials/T_Wood_Planks_BaseColor.jpg
+map_Bump ../textures/materials/T_Wood_Planks_Normal.png
+norm ../textures/materials/T_Wood_Planks_Normal.png
+map_Pr ../textures/materials/T_Wood_Planks_Roughness.jpg
+
+newmtl T_OSB_Plywood
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Pm 0.00
+map_Kd ../textures/materials/T_OSB_Plywood_BaseColor.jpg
+map_Bump ../textures/materials/T_OSB_Plywood_Normal.png
+norm ../textures/materials/T_OSB_Plywood_Normal.png
+map_Pr ../textures/materials/T_OSB_Plywood_Roughness.jpg
