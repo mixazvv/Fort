@@ -101,7 +101,7 @@ class Node:
         src.out_links[output_name].append((self, input_name))
 
 
-def pin(pin_id, name, index, direction_out, links, default=None):
+def pin(pin_id, name, direction_out, links, default=None):
     linked = "".join(f"{n} {p}," for n, p in links)
     fields = [
         f"PinId={pin_id}",
@@ -110,7 +110,7 @@ def pin(pin_id, name, index, direction_out, links, default=None):
     if direction_out:
         fields.append('Direction="EGPD_Output"')
     fields += [
-        'PinType.PinCategory="{}"'.format("" if direction_out else "optional"),
+        'PinType.PinCategory="{}"'.format("" if direction_out else "required"),
         'PinType.PinSubCategory=""',
         "PinType.PinSubCategoryObject=None",
         "PinType.PinSubCategoryMemberReference=()",
@@ -120,13 +120,13 @@ def pin(pin_id, name, index, direction_out, links, default=None):
         "PinType.bIsConst=False",
         "PinType.bIsWeakPointer=False",
         "PinType.bIsUObjectWrapper=False",
+        "PinType.bSerializeAsSinglePrecisionFloat=False",
     ]
     if default is not None:
         fields.append(f'DefaultValue="{default}"')
     if links:
         fields.append(f"LinkedTo=({linked})")
     fields += [
-        f"SourceIndex={index}",
         "PersistentGuid=00000000000000000000000000000000",
         "bHidden=False",
         "bNotConnectable=False",
@@ -138,22 +138,30 @@ def pin(pin_id, name, index, direction_out, links, default=None):
     return "   CustomProperties Pin (" + ",".join(fields) + ",)"
 
 
+MATERIAL = "M_Fisheye"
+
+
 def node_text(n, nodes_by_name):
-    lines = [f'Begin Object Class=/Script/UnrealEd.MaterialGraphNode Name="{n.name}"']
-    lines.append(f'   Begin Object Class=/Script/Engine.MaterialExpression{n.cls} Name="{n.expr}"')
+    graph = f"/Engine/Transient.{MATERIAL}:MaterialGraph_0"
+    node_path = f"/Script/UnrealEd.MaterialGraphNode'{graph}.{n.name}'"
+    expr_path = f"/Script/Engine.MaterialExpression{n.cls}'{graph}.{n.name}.{n.expr}'"
+    lines = [f'Begin Object Class=/Script/UnrealEd.MaterialGraphNode Name="{n.name}" ExportPath="{node_path}"']
+    lines.append(f'   Begin Object Class=/Script/Engine.MaterialExpression{n.cls} Name="{n.expr}" ExportPath="{expr_path}"')
     lines.append("   End Object")
-    lines.append(f'   Begin Object Name="{n.expr}"')
+    lines.append(f'   Begin Object Name="{n.expr}" ExportPath="{expr_path}"')
     for inp, (src, out) in n.in_links.items():
         out_index = list(src.outputs).index(out)
         prop = "Coordinates" if inp == "UVs" else inp
-        lines.append(f"      {prop}=(Expression=MaterialExpression{src.cls}'\"{src.name}.{src.expr}\"',OutputIndex={out_index})")
+        index = f",OutputIndex={out_index}" if out_index else ""
+        lines.append(f'      {prop}=(Expression="/Script/Engine.MaterialExpression{src.cls}\'{src.name}.{src.expr}\'"{index})')
     for p in n.props:
         lines.append(f"      {p}")
     lines.append(f"      MaterialExpressionEditorX={n.x}")
     lines.append(f"      MaterialExpressionEditorY={n.y}")
     lines.append(f"      MaterialExpressionGuid={guid()}")
+    lines.append(f'      Material="/Script/UnrealEd.PreviewMaterial\'/Engine/Transient.{MATERIAL}\'"')
     lines.append("   End Object")
-    lines.append(f"   MaterialExpression=MaterialExpression{n.cls}'\"{n.expr}\"'")
+    lines.append(f'   MaterialExpression="/Script/Engine.MaterialExpression{n.cls}\'{n.expr}\'"')
     lines.append(f"   NodePosX={n.x}")
     lines.append(f"   NodePosY={n.y}")
     lines.append(f"   NodeGuid={guid()}")
@@ -162,10 +170,10 @@ def node_text(n, nodes_by_name):
         if name in n.in_links:
             src, out = n.in_links[name]
             links = [(src.name, src.outputs[out])]
-        lines.append(pin(pid, name, i, False, links))
+        lines.append(pin(pid, name, False, links))
     for i, (name, pid) in enumerate(n.outputs.items()):
         links = [(dst.name, dst.inputs[inp]) for dst, inp in n.out_links[name]]
-        lines.append(pin(pid, name, i, True, links))
+        lines.append(pin(pid, name, True, links))
     lines.append("End Object")
     return "\n".join(lines)
 
