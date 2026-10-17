@@ -144,6 +144,54 @@ Begin Map
          ActorLabel="Flicker_Corridor_S"
          FolderPath="Warehouse17/Lights/Flicker"
       End Actor
+      Begin Actor Class=/Script/Engine.PointLight Name=Lamp_Lobby_1 Archetype=/Script/Engine.PointLight'/Script/Engine.Default__PointLight'
+         Begin Object Class=/Script/Engine.PointLightComponent Name="LightComponent0" Archetype=/Script/Engine.PointLightComponent'/Script/Engine.Default__PointLight:LightComponent0'
+         End Object
+         Begin Object Name="LightComponent0"
+            Intensity=20.000000
+            IntensityUnits=Candelas
+            LightColor=(B=255,G=240,R=220,A=255)
+            AttenuationRadius=1400.000000
+            RelativeLocation=(X=9500.0,Y=2200.0,Z=340.0)
+         End Object
+         PointLightComponent=LightComponent0
+         LightComponent=LightComponent0
+         RootComponent=LightComponent0
+         ActorLabel="Lamp_Lobby_1"
+         FolderPath="Warehouse17/Lights/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.PointLight Name=Lamp_Lobby_2 Archetype=/Script/Engine.PointLight'/Script/Engine.Default__PointLight'
+         Begin Object Class=/Script/Engine.PointLightComponent Name="LightComponent0" Archetype=/Script/Engine.PointLightComponent'/Script/Engine.Default__PointLight:LightComponent0'
+         End Object
+         Begin Object Name="LightComponent0"
+            Intensity=20.000000
+            IntensityUnits=Candelas
+            LightColor=(B=255,G=240,R=220,A=255)
+            AttenuationRadius=1400.000000
+            RelativeLocation=(X=10000.0,Y=2200.0,Z=340.0)
+         End Object
+         PointLightComponent=LightComponent0
+         LightComponent=LightComponent0
+         RootComponent=LightComponent0
+         ActorLabel="Lamp_Lobby_2"
+         FolderPath="Warehouse17/Lights/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.PointLight Name=Lamp_Lobby_3 Archetype=/Script/Engine.PointLight'/Script/Engine.Default__PointLight'
+         Begin Object Class=/Script/Engine.PointLightComponent Name="LightComponent0" Archetype=/Script/Engine.PointLightComponent'/Script/Engine.Default__PointLight:LightComponent0'
+         End Object
+         Begin Object Name="LightComponent0"
+            Intensity=20.000000
+            IntensityUnits=Candelas
+            LightColor=(B=255,G=240,R=220,A=255)
+            AttenuationRadius=1400.000000
+            RelativeLocation=(X=10500.0,Y=2200.0,Z=340.0)
+         End Object
+         PointLightComponent=LightComponent0
+         LightComponent=LightComponent0
+         RootComponent=LightComponent0
+         ActorLabel="Lamp_Lobby_3"
+         FolderPath="Warehouse17/Lights/Lobby"
+      End Actor
    End Level
 Begin Surface
 End Surface

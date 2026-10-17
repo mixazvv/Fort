@@ -1068,6 +1068,305 @@ Begin Map
          ActorLabel="OSB_3_082"
          FolderPath="Warehouse17/Cover"
       End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Floor_083 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=10000.0,Y=2200.0,Z=-8.0)
+            RelativeScale3D=(X=20.0000,Y=14.0000,Z=0.2000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Floor_083"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Roof_084 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=10000.0,Y=2200.0,Z=394.0)
+            RelativeScale3D=(X=20.0000,Y=14.0000,Z=0.2000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Roof_084"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Wall_N_085 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=10000.0,Y=1500.0,Z=192.0)
+            RelativeScale3D=(X=20.0000,Y=0.2000,Z=3.8400)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Wall_N_085"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Wall_S_086 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=10000.0,Y=2900.0,Z=192.0)
+            RelativeScale3D=(X=20.0000,Y=0.2000,Z=3.8400)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Wall_S_086"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Wall_W_087 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9000.0,Y=2200.0,Z=192.0)
+            RelativeScale3D=(X=0.2000,Y=14.0000,Z=3.8400)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Wall_W_087"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Wall_E_088 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=11000.0,Y=2200.0,Z=192.0)
+            RelativeScale3D=(X=0.2000,Y=14.0000,Z=3.8400)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Wall_E_088"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Locker_089 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9260.0,Y=1545.0,Z=100.0)
+            RelativeScale3D=(X=0.9500,Y=0.6000,Z=2.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Locker_089"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Locker_090 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9365.0,Y=1545.0,Z=100.0)
+            RelativeScale3D=(X=0.9500,Y=0.6000,Z=2.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Locker_090"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Locker_091 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9470.0,Y=1545.0,Z=100.0)
+            RelativeScale3D=(X=0.9500,Y=0.6000,Z=2.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Locker_091"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Locker_092 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9575.0,Y=1545.0,Z=100.0)
+            RelativeScale3D=(X=0.9500,Y=0.6000,Z=2.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Locker_092"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Locker_093 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9680.0,Y=1545.0,Z=100.0)
+            RelativeScale3D=(X=0.9500,Y=0.6000,Z=2.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Locker_093"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Locker_094 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9785.0,Y=1545.0,Z=100.0)
+            RelativeScale3D=(X=0.9500,Y=0.6000,Z=2.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Locker_094"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Locker_095 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9890.0,Y=1545.0,Z=100.0)
+            RelativeScale3D=(X=0.9500,Y=0.6000,Z=2.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Locker_095"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Locker_096 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9995.0,Y=1545.0,Z=100.0)
+            RelativeScale3D=(X=0.9500,Y=0.6000,Z=2.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Locker_096"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Locker_097 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=10100.0,Y=1545.0,Z=100.0)
+            RelativeScale3D=(X=0.9500,Y=0.6000,Z=2.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Locker_097"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Locker_098 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=10205.0,Y=1545.0,Z=100.0)
+            RelativeScale3D=(X=0.9500,Y=0.6000,Z=2.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Locker_098"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Bench_099 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9750.0,Y=2020.0,Z=23.0)
+            RelativeScale3D=(X=6.0000,Y=0.4500,Z=0.4500)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Bench_099"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Bench_100 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9750.0,Y=2280.0,Z=23.0)
+            RelativeScale3D=(X=6.0000,Y=0.4500,Z=0.4500)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Bench_100"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Bench_101 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9750.0,Y=2540.0,Z=23.0)
+            RelativeScale3D=(X=6.0000,Y=0.4500,Z=0.4500)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Bench_101"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Table_102 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=10550.0,Y=2200.0,Z=40.0)
+            RelativeScale3D=(X=1.4000,Y=4.2000,Z=0.8000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Table_102"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Board_103 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=10982.0,Y=2200.0,Z=210.0)
+            RelativeScale3D=(X=0.0600,Y=6.4000,Z=3.0000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Board_103"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Rack_104 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9040.0,Y=1820.0,Z=90.0)
+            RelativeScale3D=(X=0.5000,Y=3.2000,Z=1.8000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Rack_104"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.StaticMeshActor Name=Lobby_Rack_105 Archetype=/Script/Engine.StaticMeshActor'/Script/Engine.Default__StaticMeshActor'
+         Begin Object Class=/Script/Engine.StaticMeshComponent Name="StaticMeshComponent0" Archetype=/Script/Engine.StaticMeshComponent'/Script/Engine.Default__StaticMeshActor:StaticMeshComponent0'
+         End Object
+         Begin Object Name="StaticMeshComponent0"
+            StaticMesh=/Script/Engine.StaticMesh'/Engine/BasicShapes/Cube.Cube'
+            RelativeLocation=(X=9040.0,Y=2580.0,Z=90.0)
+            RelativeScale3D=(X=0.5000,Y=3.2000,Z=1.8000)
+         End Object
+         StaticMeshComponent=StaticMeshComponent0
+         RootComponent=StaticMeshComponent0
+         ActorLabel="Lobby_Rack_105"
+         FolderPath="Warehouse17/Lobby"
+      End Actor
       Begin Actor Class=/Script/Engine.PointLight Name=Lamp_Yard_N Archetype=/Script/Engine.PointLight'/Script/Engine.Default__PointLight'
          Begin Object Class=/Script/Engine.PointLightComponent Name="LightComponent0" Archetype=/Script/Engine.PointLightComponent'/Script/Engine.Default__PointLight:LightComponent0'
          End Object
@@ -1211,6 +1510,54 @@ Begin Map
          RootComponent=LightComponent0
          ActorLabel="Flicker_Corridor_S"
          FolderPath="Warehouse17/Lights/Flicker"
+      End Actor
+      Begin Actor Class=/Script/Engine.PointLight Name=Lamp_Lobby_1 Archetype=/Script/Engine.PointLight'/Script/Engine.Default__PointLight'
+         Begin Object Class=/Script/Engine.PointLightComponent Name="LightComponent0" Archetype=/Script/Engine.PointLightComponent'/Script/Engine.Default__PointLight:LightComponent0'
+         End Object
+         Begin Object Name="LightComponent0"
+            Intensity=20.000000
+            IntensityUnits=Candelas
+            LightColor=(B=255,G=240,R=220,A=255)
+            AttenuationRadius=1400.000000
+            RelativeLocation=(X=9500.0,Y=2200.0,Z=340.0)
+         End Object
+         PointLightComponent=LightComponent0
+         LightComponent=LightComponent0
+         RootComponent=LightComponent0
+         ActorLabel="Lamp_Lobby_1"
+         FolderPath="Warehouse17/Lights/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.PointLight Name=Lamp_Lobby_2 Archetype=/Script/Engine.PointLight'/Script/Engine.Default__PointLight'
+         Begin Object Class=/Script/Engine.PointLightComponent Name="LightComponent0" Archetype=/Script/Engine.PointLightComponent'/Script/Engine.Default__PointLight:LightComponent0'
+         End Object
+         Begin Object Name="LightComponent0"
+            Intensity=20.000000
+            IntensityUnits=Candelas
+            LightColor=(B=255,G=240,R=220,A=255)
+            AttenuationRadius=1400.000000
+            RelativeLocation=(X=10000.0,Y=2200.0,Z=340.0)
+         End Object
+         PointLightComponent=LightComponent0
+         LightComponent=LightComponent0
+         RootComponent=LightComponent0
+         ActorLabel="Lamp_Lobby_2"
+         FolderPath="Warehouse17/Lights/Lobby"
+      End Actor
+      Begin Actor Class=/Script/Engine.PointLight Name=Lamp_Lobby_3 Archetype=/Script/Engine.PointLight'/Script/Engine.Default__PointLight'
+         Begin Object Class=/Script/Engine.PointLightComponent Name="LightComponent0" Archetype=/Script/Engine.PointLightComponent'/Script/Engine.Default__PointLight:LightComponent0'
+         End Object
+         Begin Object Name="LightComponent0"
+            Intensity=20.000000
+            IntensityUnits=Candelas
+            LightColor=(B=255,G=240,R=220,A=255)
+            AttenuationRadius=1400.000000
+            RelativeLocation=(X=10500.0,Y=2200.0,Z=340.0)
+         End Object
+         PointLightComponent=LightComponent0
+         LightComponent=LightComponent0
+         RootComponent=LightComponent0
+         ActorLabel="Lamp_Lobby_3"
+         FolderPath="Warehouse17/Lights/Lobby"
       End Actor
    End Level
 Begin Surface

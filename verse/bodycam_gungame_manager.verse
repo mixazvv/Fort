@@ -24,6 +24,9 @@ bodycam_gungame_manager := class(bodycam_respawn_mode):
 
     ModeTitle<override>():string = "ГОНКА ВООРУЖЕНИЙ"
 
+    # Оружие выдаёт сама гонка, арсенал на экране смерти не нужен.
+    UsesArsenal<override>()<transacts>:logic = false
+
     GetLevel(P:player)<transacts>:int =
         if (Value := Levels[P]) then Value else 0
 

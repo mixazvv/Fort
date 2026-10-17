@@ -508,6 +508,42 @@ def decal_graffiti(size, rng):
     return rgba_from(img, alpha, rng, 0.15)
 
 
+def decal_briefing_board(size, rng):
+    """Доска в брифинге: план «Склада 17», маршруты команд маркером, задача."""
+    w, h = size, int(size * 0.6)
+    board = Image.new("RGB", (w, h), (226, 228, 222))
+    d = ImageDraw.Draw(board)
+    plan_path = Path(__file__).resolve().parent.parent / "docs" / "map_warehouse17.png"
+    if plan_path.exists():
+        plan = Image.open(plan_path).convert("RGB")
+        plan = plan.crop((0, 0, plan.width, int(plan.height * 0.84)))
+        plan.thumbnail((int(w * 0.62), int(h * 0.82)))
+        board.paste(plan, (int(w * 0.03), int(h * 0.12)))
+        px0, py0 = int(w * 0.03), int(h * 0.12)
+        sx, sy = plan.width / 1080, plan.height / (960 * 0.84)
+        # Маршруты маркером поверх плана (координаты схемы 1080×960).
+        red, blue = (190, 30, 30), (30, 60, 170)
+        for color, pts in ((blue, [(120, 420), (300, 420), (450, 420)]), (red, [(960, 420), (800, 420), (650, 420)])):
+            pts = [(px0 + x * sx, py0 + y * sy) for x, y in pts]
+            d.line(pts, fill=color, width=6, joint="curve")
+            ex, ey = pts[-1]
+            d.polygon([(ex, ey - 12), (ex + (18 if color == blue else -18), ey), (ex, ey + 12)], fill=color)
+        d.ellipse([px0 + 470 * sx, py0 + 330 * sy, px0 + 560 * sx, py0 + 520 * sy], outline=(190, 30, 30), width=5)
+    title = fit_font(d, "ОПЕРАЦИЯ «СКЛАД 17»", FONT_BOLD, w * 0.62, h * 0.08)
+    d.text((int(w * 0.03), int(h * 0.02)), "ОПЕРАЦИЯ «СКЛАД 17»", font=title, fill=(25, 25, 30))
+    notes = ["ALPHA → ДВОР", "BRAVO → ОФИСЫ", "", "ЦЕХ = КЛЮЧ", "АНТРЕСОЛЬ — ВЫСОТА", "КОТЕЛЬНАЯ: ТЕМНО", "", "БЕЗ КАМЕР НЕ ВХОДИТЬ"]
+    font = fit_font(d, "АНТРЕСОЛЬ — ВЫСОТА", FONT_BOLD, w * 0.3, h * 0.07)
+    for i, line in enumerate(notes):
+        color = (190, 30, 30) if "КЛЮЧ" in line or "КАМЕР" in line else (25, 25, 30)
+        d.text((int(w * 0.68), int(h * 0.16 + i * h * 0.09)), line, font=font, fill=color)
+    d.rectangle([0, 0, w - 1, h - 1], outline=(120, 120, 120), width=10)
+    arr = np.asarray(board, dtype=float) / 255
+    smudge = contrast(fbm(w, 4, rng, octaves=4)[:h, :w], 0.5, 0.95)
+    arr = arr * (1 - 0.12 * smudge[..., None])
+    img = Image.fromarray((np.clip(arr, 0, 1) * 255).astype(np.uint8))
+    return rgba_from(img, Image.new("L", (w, h), 255), rng, 0.0)
+
+
 def make_decals(size, rng):
     return [
         ("D_Hazard_Stripes", decal_hazard_stripes(size, rng), "Края рампы, колонны, ворота (тянется по горизонтали)"),
@@ -518,6 +554,7 @@ def make_decals(size, rng):
         ("D_Oil_Stain", decal_oil_stain(size, rng), "Пятна масла на бетоне и асфальте"),
         ("D_Sign_Caution", decal_sign(size, rng, "ОСТОРОЖНО!", "РАБОТАЕТ ПОГРУЗЧИК", (230, 185, 30), (20, 20, 20), (20, 20, 20)), "Цех, рампа"),
         ("D_Graffiti_Tags", decal_graffiti(size, rng), "Стены коридоров, лестниц, котельной"),
+        ("D_Briefing_Board", decal_briefing_board(size, rng), "Доска в брифинге (лобби), на восточной стене"),
         ("D_Sign_NoEntry", decal_sign(size, rng, "ПОСТОРОННИМ", "ВХОД ЗАПРЕЩЁН", (235, 235, 230), (175, 25, 25), (175, 25, 25)), "Двери офисов, серверная"),
     ]
 
