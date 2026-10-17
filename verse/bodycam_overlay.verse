@@ -81,9 +81,10 @@ bodycam_overlay := class:
                 AnchoredSlot(StatusText, 0.5, 0.0, 0.0, 30.0)
                 AnchoredSlot(CenterText, 0.5, 0.5, 0.0, -120.0)
                 AnchoredSlot(RadioText, 0.0, 1.0, 40.0, -30.0)
-                AnchoredSlot(LensText, 1.0, 1.0, -40.0, -30.0)
+                AnchoredSlot(LensText, 1.0, 0.0, -40.0, 62.0)
                 FullScreenSlot(NoSignalBackground)
-                AnchoredSlot(NoSignalText, 0.5, 0.5, 0.0, 0.0)
+                # Выше центра, чтобы не пряталось за меню снаряжения.
+                AnchoredSlot(NoSignalText, 0.5, 0.5, 0.0, -220.0)
 
         if (PlayerUI := GetPlayerUI[Player]):
             PlayerUI.AddWidget(Root, player_ui_slot{InputMode := ui_input_mode.None})
