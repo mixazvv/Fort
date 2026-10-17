@@ -80,16 +80,33 @@ ArsenalClose : int = 11
 
 bodycam_arsenal_device := class(creative_device):
 
-    # Варианты основного оружия. Пример в docs/START_HERE.md.
+    # Варианты основного оружия. Строки уже заполнены как в docs/START_HERE.md,
+    # в редакторе остаётся выбрать Granter у каждой.
     @editable
-    Variants : []bodycam_weapon_variant = array{}
+    Variants : []bodycam_weapon_variant = array:
+        bodycam_weapon_variant{Platform := "ШТУРМОВАЯ ВИНТОВКА", Optic := "МЕХАНИКА", Muzzle := "НЕТ"}
+        bodycam_weapon_variant{Platform := "ШТУРМОВАЯ ВИНТОВКА", Optic := "МЕХАНИКА", Muzzle := "ГЛУШИТЕЛЬ"}
+        bodycam_weapon_variant{Platform := "ШТУРМОВАЯ ВИНТОВКА", Optic := "ОПТИКА 4×", Muzzle := "НЕТ"}
+        bodycam_weapon_variant{Platform := "ШТУРМОВАЯ ВИНТОВКА", Optic := "ТЕПЛОВИЗОР", Muzzle := "НЕТ"}
+        bodycam_weapon_variant{Platform := "ПИСТОЛЕТ-ПУЛЕМЁТ", Optic := "МЕХАНИКА", Muzzle := "НЕТ"}
+        bodycam_weapon_variant{Platform := "ПИСТОЛЕТ-ПУЛЕМЁТ", Optic := "МЕХАНИКА", Muzzle := "ГЛУШИТЕЛЬ"}
+        bodycam_weapon_variant{Platform := "ДРОБОВИК", Optic := "МЕХАНИКА", Muzzle := "НЕТ"}
+        bodycam_weapon_variant{Platform := "МАРКСМАН", Optic := "ОПТИКА 4×", Muzzle := "НЕТ"}
+        bodycam_weapon_variant{Platform := "МАРКСМАН", Optic := "ОПТИКА 8×", Muzzle := "ГЛУШИТЕЛЬ"}
 
     @editable
-    Pistols : []bodycam_gear_option = array{}
+    Pistols : []bodycam_gear_option = array:
+        bodycam_gear_option{Name := "ПИСТОЛЕТ"}
+        bodycam_gear_option{Name := "ПИСТОЛЕТ С ГЛУШИТЕЛЕМ"}
+        bodycam_gear_option{Name := "РЕВОЛЬВЕР"}
+        bodycam_gear_option{Name := "ДИГЛ"}
 
-    # Гранаты, дым и т.п. Первым пунктом удобно сделать «НЕТ» с пустым Item Granter.
+    # Гранаты, дым и т.п. У первого пункта «НЕТ» Granter не нужен.
     @editable
-    Gear : []bodycam_gear_option = array{}
+    Gear : []bodycam_gear_option = array:
+        bodycam_gear_option{Name := "НЕТ"}
+        bodycam_gear_option{Name := "ДЫМ"}
+        bodycam_gear_option{Name := "ОСКОЛОЧНАЯ"}
 
     var Menus : [player]bodycam_arsenal_menu = map{}
     var Ready : [player]logic = map{}
