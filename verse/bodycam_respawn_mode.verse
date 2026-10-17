@@ -1,6 +1,6 @@
 # BODYCAM для Fortnite: общая основа режимов с возрождением (Deathmatch, Гонка вооружений).
-# Каждый сам за себя, матч по времени или до победного счёта.
-# На уровень эту основу не ставят: ставят bodycam_deathmatch_manager или bodycam_gungame_manager.
+# Матч по времени или до победного счёта.
+# На уровень эту основу не ставят: ставят bodycam_deathmatch_manager, bodycam_tdm_manager или bodycam_gungame_manager.
 
 using { /Fortnite.com/Devices }
 using { /Fortnite.com/Characters }
@@ -23,6 +23,10 @@ bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
 
     @editable
     MovementModulators : []movement_modulator_device = array{}
+
+    # Короткое замедление после попадания (Movement Modulator: 0.6 на 1 с).
+    @editable
+    HitSlowModulators : []movement_modulator_device = array{}
 
     @editable
     InjuredSounds : []audio_player_device = array{}
@@ -48,9 +52,14 @@ bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
     @editable
     HeavyBreathingAfterSeconds : float = 4.0
 
-    # Должно быть меньше времени возрождения из Island Settings.
+    # Должно быть меньше времени возрождения из Island Settings (5 с).
+    # Пока экран чёрный, можно выбрать снаряжение на следующую жизнь.
     @editable
-    SignalLostSeconds : float = 2.5
+    SignalLostSeconds : float = 4.0
+
+    # Показывать убийце «цель нейтрализована». Выключите для хардкора: о попадании узнаёшь только по тишине.
+    @editable
+    ConfirmKills : logic = true
 
     @editable
     ResultScreenSeconds : float = 6.0
@@ -82,6 +91,20 @@ bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
     # Название режима для заставки.
     ModeTitle():string
 
+    # --- Что режим может переопределить ---
+
+    # Позывной нового игрока.
+    MakeCallsign(P:player):string =
+        Callsign := "UNIT-{Pad2(NextUnitNumber)}"
+        set NextUnitNumber += 1
+        Callsign
+
+    # Названия наборов для меню выбора. Пусто — меню не показывается.
+    PickerOptions():[]string = array{}
+
+    # Текст на экране конца матча.
+    WinnerText(Winner:player):string = "ЛУЧШИЙ: {CallsignOf(Winner)}"
+
     OnBegin<override>()<suspends>:void =
         for (Spawner : Spawners):
             Spawner.SpawnedEvent().Subscribe(OnSpawned)
@@ -105,14 +128,14 @@ bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
 
     EnsurePlayer(P:player):void =
         if (not Agents[P]):
-            Callsign := "UNIT-{Pad2(NextUnitNumber)}"
-            set NextUnitNumber += 1
+            Callsign := MakeCallsign(P)
             Overlay := bodycam_overlay{Player := P, Callsign := Callsign, CameraModel := CameraModel, DateStamp := DateStamp}
             Feel := bodycam_feel:
                 InjuredHealthFraction := InjuredHealthFraction
                 HeavyBreathingAfterSeconds := HeavyBreathingAfterSeconds
                 SignalLostSeconds := SignalLostSeconds
-            BodycamAgent := bodycam_agent{Player := P, Mode := Self, Feel := Feel, Overlay := Overlay}
+            Picker := bodycam_loadout_picker{Player := P, Names := PickerOptions()}
+            BodycamAgent := bodycam_agent{Player := P, Mode := Self, Feel := Feel, Overlay := Overlay, Picker := Picker}
             if (set Agents[P] = BodycamAgent) {}
             Overlay.Show()
 
@@ -120,6 +143,7 @@ bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
         EnsurePlayer(P)
         if (BodycamAgent := Agents[P], Character := P.GetFortCharacter[]):
             BodycamAgent.Bind(Character)
+            BodycamAgent.Picker.Close()
             BodycamAgent.OnRespawned()
             Character.SetMaxHealth(MaxHealth)
             Character.SetHealth(MaxHealth)
@@ -138,13 +162,19 @@ bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
     OnAgentEliminated<override>(Victim:bodycam_agent, Killer:?agent):void =
         if (not MatchOver?):
             if (KillerAgent := Killer?, KillerPlayer := player[KillerAgent], KillerPlayer <> Victim.Player):
-                PlaySoundsFor(KillConfirmSounds, KillerPlayer)
-                if (KillerBodycam := Agents[KillerPlayer]):
+                if (ConfirmKills?, KillerBodycam := Agents[KillerPlayer]):
+                    PlaySoundsFor(KillConfirmSounds, KillerPlayer)
                     spawn{ KillerBodycam.Overlay.ShowRadio("РАЦИЯ › {Victim.Callsign()}: цель нейтрализована", 3.0) }
                 OnKill(KillerPlayer, Victim.Player)
             else:
                 OnSuicide(Victim.Player)
             RefreshStatus()
+            if (not MatchOver?):
+                Victim.Picker.Open("СНАРЯЖЕНИЕ · СЛЕДУЮЩАЯ ЖИЗНЬ")
+
+    OnAgentHit<override>(Victim:bodycam_agent):void =
+        for (Modulator : HitSlowModulators):
+            Modulator.Activate(Victim.Player)
 
     OnAgentInjured<override>(Victim:bodycam_agent):void =
         PlaySoundsFor(InjuredSounds, Victim.Player)
@@ -182,13 +212,22 @@ bodycam_respawn_mode := class<abstract>(creative_device, bodycam_mode):
             spawn{ RunMatchEnd(Winner) }
 
     RunMatchEnd(Winner:player)<suspends>:void =
-        BroadcastCenter("КОНЕЦ СМЕНЫ\nЛУЧШИЙ: {CallsignOf(Winner)}", ResultScreenSeconds)
+        for (P -> BodycamAgent : Agents):
+            BodycamAgent.Picker.Close()
+        BroadcastCenter("КОНЕЦ СМЕНЫ\n{WinnerText(Winner)}", ResultScreenSeconds)
         Sleep(ResultScreenSeconds)
         EndGame.Activate(Winner)
 
     BroadcastCenter(Text:string, Duration:float):void =
         for (P -> BodycamAgent : Agents):
             spawn{ BodycamAgent.Overlay.ShowCenter(Text, Duration) }
+
+    # Выдать набор, выбранный в меню (по умолчанию первый).
+    GrantSelected(P:player, Granters:[]item_granter_device):void =
+        if (BodycamAgent := Agents[P], Granter := Granters[BodycamAgent.Picker.Selected]):
+            Granter.GrantItem(P)
+        else if (Granter := Granters[0]):
+            Granter.GrantItem(P)
 
     # Игрок с наибольшим значением Score. Используется режимами для лидера и победителя по времени.
     FindLeader(Score:[player]int):?player =

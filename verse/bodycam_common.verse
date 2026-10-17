@@ -21,6 +21,7 @@ bodycam_feel := struct:
 # То, что каждый режим (раунды, deathmatch, гонка вооружений) делает по событиям игрока.
 bodycam_mode := interface:
     OnAgentEliminated(Victim:bodycam_agent, Killer:?agent):void
+    OnAgentHit(Victim:bodycam_agent):void
     OnAgentInjured(Victim:bodycam_agent):void
     OnAgentWinded(Victim:bodycam_agent):void
 

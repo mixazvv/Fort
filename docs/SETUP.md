@@ -2,22 +2,23 @@
 
 Названия настроек в UEFN иногда меняются от версии к версии. Если пункт называется иначе, ищите ближайший по смыслу.
 
-Режимов три, и у каждого свои Island Settings: в «Раундах» одна жизнь, в остальных возрождение. Поэтому каждый режим собирается как **отдельный остров**: сделайте карту один раз, затем скопируйте проект (или папку уровня) и поменяйте настройки и менеджер.
+Режимов четыре, и у каждого свои Island Settings: в «Раундах» одна жизнь, в остальных возрождение. Поэтому каждый режим собирается как **отдельный остров**: сделайте карту один раз, затем скопируйте проект (или папку уровня) и поменяйте настройки и менеджер.
 
 | Режим | Verse-устройство | Разделы |
 |---|---|---|
 | Раунды 5 на 5 | `bodycam_rounds_manager` | 1–6 |
+| Командный бой (TDM) | `bodycam_tdm_manager` | 1, 4–5 и 7 |
 | Deathmatch | `bodycam_deathmatch_manager` | 1, 4–5 и 7 |
 | Гонка вооружений | `bodycam_gungame_manager` | 1, 4–5 и 7 |
 
-Карта: [MAP.md](MAP.md).
+Карта: [MAP.md](MAP.md). Текстуры: [TEXTURES.md](TEXTURES.md).
 
 ## 1. Проект и код
 
 1. Откройте UEFN и создайте проект из шаблона **Blank** (или любого пустого острова).
 2. Скопируйте все файлы из папки `verse/` этого репозитория в Verse-папку проекта. Её видно через **Verse Explorer**: правый клик по проекту → *Open in File Explorer*. Обычно путь такой: `Documents/Fortnite Projects/<Проект>/Plugins/<Проект>/Content/`.
 3. **Verse → Build Verse Code** (Ctrl+Shift+B). Должно собраться без ошибок. Если нет, смотрите раздел «Если не компилируется».
-4. В Content Browser найдите менеджер нужного режима (`bodycam_rounds_manager`, `bodycam_deathmatch_manager` или `bodycam_gungame_manager`) и перетащите его на уровень. Ставьте только один менеджер на остров. `bodycam_respawn_mode` — общая основа, на уровень её не ставят.
+4. В Content Browser найдите менеджер нужного режима (`bodycam_rounds_manager`, `bodycam_tdm_manager`, `bodycam_deathmatch_manager` или `bodycam_gungame_manager`) и перетащите его на уровень. Ставьте только один менеджер на остров. `bodycam_respawn_mode` — общая основа, на уровень её не ставят.
 
 ## 2. Island Settings (Раунды)
 
@@ -40,6 +41,7 @@
 | | Drop items on elimination | Off |
 | | Starting inventory | пусто (выдаёт Verse) |
 | Интерфейс | Show Names / Nameplates | Off |
+| | Damage numbers / хитмаркеры (если есть настройка) | Off |
 | Прочее | Time of Day | ночь (около 02:00) |
 
 ## 3. Устройства (Раунды)
@@ -50,8 +52,10 @@
 |---|---|---|
 | **Round Settings** | по умолчанию | `RoundSettings` |
 | **End Game** | End: Game, Winner: Activating Team | `EndGame` |
-| **Item Granter** ×N (по одному на набор) | Grant: Weapon + Pistol, On Grant: Clear Inventory, Equip: First Item, боезапас 2–3 магазина | `LoadoutGranters` |
+| **Item Granter** ×N (по одному на набор) | основное оружие + пистолет, On Grant: Clear Inventory, Equip: First Item, боезапас 2–3 магазина | `LoadoutGranters` |
+| — | названия наборов в том же порядке, для меню выбора | `LoadoutNames` |
 | **Movement Modulator** | Movement Multiplier 0.85, Effect Duration: Infinite | `MovementModulators` |
+| **Movement Modulator** — «попадание» | Movement Multiplier 0.6, Effect Duration: 1 с | `HitSlowModulators` |
 | **Audio Player** — сердцебиение | Heartbeat, Play to: Registered/Instigator, Looping off | `InjuredSounds` |
 | **Audio Player** — одышка | heavy breathing | `BreathingSounds` |
 | **Audio Player** — рация | короткий хрип / щелчок рации | `RadioSounds` |
@@ -61,7 +65,7 @@
 
 - **Player Spawner**: по 5 на команду, на противоположных концах карты, Team 1 и Team 2.
 - **First Person Camera** (Camera — First Person): Add Players on Start = On, все команды.
-- **HUD Controller**: выключите всё (Health, Shield, Minimap, Elimination feed, Team info, Round info, Quick bar по желанию, Crosshair по желанию; без прицела будет хардкорнее). Оверлей Verse при этом останется на экране.
+- **HUD Controller**: выключите всё: Health, Shield, Minimap, Elimination feed, Team info, Round info и **Crosshair/Reticle**. Как в Bodycam: прицела нет, стреляют через прицел оружия или навскидку. Quick bar можно оставить, чтобы видеть, что в руках. Оверлей Verse при этом останется на экране.
 - **Post Process Volume**: Infinite Extent (Unbound) = On, настройки ниже.
 - **Exponential Height Fog**: Volumetric Fog On, Density около 0.03, холодный голубоватый цвет.
 
@@ -130,8 +134,9 @@ Emissive = Color
 
 1. **Launch Session**, затем запустите сессию с 2+ игроками (можно с ботами или вторым аккаунтом).
 2. Проверьте:
-   - [ ] В начале раунда видны «РАУНД 1» и отсчёт подготовки, игроки стоят на месте.
-   - [ ] После отсчёта игроки двигаются, выдано оружие из одного из наборов.
+   - [ ] В начале раунда видны «РАУНД 1» и отсчёт подготовки, игроки стоят на месте, открыто меню «СНАРЯЖЕНИЕ».
+   - [ ] Клик по набору закрывает меню. После отсчёта выдаётся выбранный набор. В следующем раунде меню помнит выбор.
+   - [ ] После попадания игрок на секунду замедляется.
    - [ ] Мигает REC, идут часы, отображается позывной.
    - [ ] Попадание даёт вспышку. После 2 попаданий из AR игрок выбывает.
    - [ ] Ниже 50% HP появляется красная виньетка и звучит сердцебиение.
@@ -140,17 +145,17 @@ Emissive = Color
    - [ ] Счёт сохраняется между раундами, при 5 победах матч заканчивается.
    - [ ] По истечении 3:00 раунд достаётся команде, у которой больше живых.
 
-## 7. Deathmatch и Гонка вооружений
+## 7. Командный бой, Deathmatch и Гонка вооружений
 
 ### Island Settings (отличия от «Раундов»)
 
 | Настройка | Значение |
 |---|---|
 | Max Players | 12 |
-| Teams | Free For All (каждый сам за себя) |
+| Teams | TDM: 2 команды по 6. DM и Гонка: Free For All (каждый сам за себя) |
 | Total Rounds | 1 |
 | Spawn Limit | без ограничения (возрождение включено) |
-| Respawn Time | 3 с (больше, чем `SignalLostSeconds` = 2,5 с) |
+| Respawn Time | 5 с (больше, чем `SignalLostSeconds` = 4 с; за это время игрок выбирает снаряжение) |
 | Spawn Location | Player Spawners |
 | Max Health / Shield, регенерация, строительство | как в «Раундах» |
 
@@ -158,17 +163,26 @@ Emissive = Color
 
 | Устройство | Настройки | Поле в Verse |
 |---|---|---|
-| **End Game** | End: Game, Winner: Activating Player | `EndGame` |
-| **Player Spawner** ×12 | Team: Any, координаты в [MAP.md](MAP.md) | `Spawners` (добавьте **все**) |
+| **End Game** | End: Game. Winner: Activating Team (TDM) или Activating Player (DM, Гонка) | `EndGame` |
+| **Player Spawner** ×12 | DM и Гонка: Team Any. TDM: 6 для Team 1 и 6 для Team 2 (спавны «Раундов» плюс по одному в рампе/котельной на своей стороне). Координаты в [MAP.md](MAP.md) | `Spawners` (добавьте **все**) |
 | **Movement Modulator** | как в «Раундах» | `MovementModulators` |
+| **Movement Modulator** — «попадание» | как в «Раундах» | `HitSlowModulators` |
 | **Audio Player** — сердцебиение / одышка | как в «Раундах» | `InjuredSounds`, `BreathingSounds` |
 | **Audio Player** — подтверждение | короткий щелчок рации | `KillConfirmSounds` |
 
 First Person Camera, HUD Controller, Post Process Volume и туман такие же, как в разделе 3.
 
+`ConfirmKills`: включено по умолчанию, убийца видит «цель нейтрализована». Выключите для хардкора: о результате выстрела узнаёшь только по тишине.
+
+### Командный бой (`bodycam_tdm_manager`)
+
+- `LoadoutGranters` и `LoadoutNames`: как в «Раундах». Меню выбора открывается на экране «НЕТ СИГНАЛА», выбранный набор выдаётся при следующем возрождении.
+- `ScoreToWin` = 50, `MatchSeconds` = 600. Убийство своего отнимает очко у команды.
+- Позывные ALPHA-n и BRAVO-n, вверху экрана счёт «ALPHA 23 : 19 BRAVO · ДО 50».
+
 ### Deathmatch (`bodycam_deathmatch_manager`)
 
-- `LoadoutGranters`: 3–5 Item Granter с наборами (например, «винтовка + пистолет», «ПП + пистолет», «дробовик + пистолет»). В каждом включите очистку инвентаря при выдаче. Набор выдаётся случайно при каждом возрождении.
+- `LoadoutGranters` и `LoadoutNames`: как в «Раундах». Выбор делается на экране «НЕТ СИГНАЛА», в первой жизни выдаётся первый набор.
 - `KillsToWin` = 25, `MatchSeconds` = 600.
 - Смерть без убийцы (падение) отнимает 1 очко.
 
@@ -192,7 +206,9 @@ First Person Camera, HUD Controller, Post Process Volume и туман таки�
 
 ### Проверка
 
+- [ ] После смерти поверх «НЕТ СИГНАЛА» открывается меню снаряжения (кроме Гонки). После возрождения выдаётся выбранный набор.
 - [ ] После возрождения снова идёт запись (● REC), «НЕТ СИГНАЛА» пропадает, здоровье 45.
+- [ ] TDM: счёт команд растёт, при 50 появляется «ПОБЕДА ALPHA/BRAVO».
 - [ ] Убийца видит «РАЦИЯ › UNIT-04: цель нейтрализована».
 - [ ] Deathmatch: счётчик «УБИЙСТВ n/25» растёт, при 25 появляется «КОНЕЦ СМЕНЫ» и матч заканчивается.
 - [ ] Гонка: после убийства оружие меняется сразу, по центру появляется название нового. Убийство на последней ступени заканчивает матч.
@@ -205,6 +221,7 @@ First Person Camera, HUD Controller, Post Process Volume и туман таки�
 - **`audio_player_device.Play(Agent)`**: если перегрузки нет, используйте `Play()` и настройте устройство так, чтобы звук был позиционным у игрока.
 - **`SprintedEvent`**: если у `fort_character` нет этого события, удалите подписку в `bodycam_agent.verse`. Одышка просто пропадёт.
 - **Абстрактный класс** `bodycam_respawn_mode`: если UEFN не принимает `class<abstract>` от `creative_device`, уберите `<abstract>` и дайте методам `GrantForPlayer`, `OnKill` и остальным пустые тела (`= {}`, а для возвращающих значение `= false` или `= ""`).
+- **Меню снаряжения** (`bodycam_loadout_picker.verse`): если не находится `stack_box` или `button_loud`, проверьте `using { /UnrealEngine.com/Temporary/UI }` и `using { /Fortnite.com/UI }`. Если `set Picker.Selected = Saved` ругается на доступ к полю, добавьте в класс метод `SetSelected(I:int):void = set Selected = I`.
 - **`GetSession()`**: если не находится, проверьте `using { /Verse.org/Simulation }`.
 - Ошибки про эффекты (`<transacts>`, `<decides>`): обычно лечатся оборачиванием вызова в `if (...) {}`.
 

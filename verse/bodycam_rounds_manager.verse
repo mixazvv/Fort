@@ -17,6 +17,8 @@ using { /Verse.org/Random }
 bodycam_match_state := struct:
     RoundNumber : int = 1
     Scores : []int = array{0, 0}
+    # Выбранное снаряжение каждого игрока, чтобы меню между раундами помнило выбор.
+    Loadouts : [player]int = map{}
 
 var BodycamMatchStates : weak_map(session, bodycam_match_state) = map{}
 
@@ -34,9 +36,18 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
 
     # --- Необязательные устройства (можно оставить пустыми) ---
 
-    # Наборы оружия. Каждый раунд выбирается один случайный, одинаковый для всех.
+    # Наборы снаряжения на выбор (как в Bodycam: основное + пистолет).
+    # В каждом Item Granter включите очистку инвентаря при выдаче.
     @editable
     LoadoutGranters : []item_granter_device = array{}
+
+    # Названия наборов для меню, в том же порядке, что LoadoutGranters.
+    @editable
+    LoadoutNames : []string = array{}
+
+    # Короткое замедление после попадания (Movement Modulator: 0.6 на 1 с).
+    @editable
+    HitSlowModulators : []movement_modulator_device = array{}
 
     # Замедление шага для «тяжёлого» передвижения (скорость около 0.85).
     @editable
@@ -63,8 +74,9 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
     @editable
     RoundsToWin : int = 5
 
+    # Подготовка: стоим на месте и выбираем снаряжение.
     @editable
-    PrepSeconds : int = 10
+    PrepSeconds : int = 15
 
     @editable
     RoundSeconds : int = 180
@@ -97,6 +109,7 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
     var Agents : [player]bodycam_agent = map{}
     var Alive : [player]logic = map{}
     var Scores : []int = array{0, 0}
+    var SavedLoadouts : [player]int = map{}
     var RoundNumber : int = 1
     var InPrep : logic = true
     var RoundOver : logic = false
@@ -130,7 +143,10 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
             InjuredHealthFraction := InjuredHealthFraction
             HeavyBreathingAfterSeconds := HeavyBreathingAfterSeconds
             SignalLostSeconds := SignalLostSeconds
-        BodycamAgent := bodycam_agent{Player := P, Mode := Self, Feel := Feel, Overlay := Overlay}
+        Picker := bodycam_loadout_picker{Player := P, Names := LoadoutNames}
+        if (Saved := SavedLoadouts[P]):
+            set Picker.Selected = Saved
+        BodycamAgent := bodycam_agent{Player := P, Mode := Self, Feel := Feel, Overlay := Overlay, Picker := Picker}
         if (set Agents[P] = BodycamAgent) {}
         Overlay.Show()
 
@@ -194,7 +210,8 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
     RunRound()<suspends>:void =
         # 1. Подготовка: все стоят на месте и могут только осматриваться.
         set InPrep = true
-        GrantRoundLoadout()
+        for (P -> BodycamAgent : Agents):
+            BodycamAgent.Picker.Open("СНАРЯЖЕНИЕ")
         BroadcastCenter("РАУНД {RoundNumber}\n{ScoreLine()}", 4.0)
         var Remaining : int = PrepSeconds
         loop:
@@ -206,6 +223,9 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
 
         # 2. Бой.
         set InPrep = false
+        for (P -> BodycamAgent : Agents):
+            BodycamAgent.Picker.Close()
+            GrantLoadout(P, BodycamAgent.Picker.Selected)
         for (P -> BodycamAgent : Agents, Character := P.GetFortCharacter[]):
             Character.ReleaseFromStasis()
         for (Sound : RoundStartSounds):
@@ -296,12 +316,17 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
             if (Old := Scores[WinnerTeam], set Scores[WinnerTeam] = Old + 1) {}
             RoundEndedEvent.Signal()
 
-    GrantRoundLoadout():void =
-        if (Granter := LoadoutGranters[GetRandomInt(0, LoadoutGranters.Length - 1)]):
-            for (P -> BodycamAgent : Agents):
-                Granter.GrantItem(P)
+    GrantLoadout(P:player, Index:int):void =
+        if (Granter := LoadoutGranters[Index]):
+            Granter.GrantItem(P)
+        else if (Granter := LoadoutGranters[0]):
+            Granter.GrantItem(P)
 
     # ---------- Звук ----------
+
+    OnAgentHit<override>(Victim:bodycam_agent):void =
+        for (Modulator : HitSlowModulators):
+            Modulator.Activate(Victim.Player)
 
     OnAgentInjured<override>(Victim:bodycam_agent):void =
         PlaySoundsFor(InjuredSounds, Victim.Player)
@@ -331,7 +356,11 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
         if (State := BodycamMatchStates[GetSession()]):
             set RoundNumber = State.RoundNumber
             set Scores = State.Scores
+            set SavedLoadouts = State.Loadouts
 
     SaveMatchState():void =
-        NewState := bodycam_match_state{RoundNumber := RoundNumber + 1, Scores := Scores}
+        var Loadouts : [player]int = SavedLoadouts
+        for (P -> BodycamAgent : Agents):
+            if (set Loadouts[P] = BodycamAgent.Picker.Selected) {}
+        NewState := bodycam_match_state{RoundNumber := RoundNumber + 1, Scores := Scores, Loadouts := Loadouts}
         if (set BodycamMatchStates[GetSession()] = NewState) {}

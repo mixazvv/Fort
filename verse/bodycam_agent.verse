@@ -10,6 +10,7 @@ bodycam_agent := class:
     Mode : bodycam_mode
     Feel : bodycam_feel
     Overlay : bodycam_overlay
+    Picker : bodycam_loadout_picker
 
     var SprintStartTime : float = 0.0
     var IsInjured : logic = false
@@ -36,6 +37,7 @@ bodycam_agent := class:
     OnDamaged(Result:damage_result):void =
         if (not IsDown?):
             spawn{ Overlay.FlashHit() }
+            Mode.OnAgentHit(Self)
             if:
                 not IsInjured?
                 Character := Player.GetFortCharacter[]
