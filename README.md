@@ -31,6 +31,8 @@
 | `docs/TEXTURES.md` | Текстуры: где какую использовать, импорт и материалы в UEFN |
 | `textures/` | 9 PBR-материалов (BaseColor, Normal, Roughness) и 8 декалей |
 | `tools/generate_textures.py` | Генератор текстур (numpy + Pillow), можно пересобрать в 2K |
+| `paste/` | Готовые блоки для вставки в UEFN через Ctrl+V: постобработка, «рыбий глаз», коробка карты |
+| `tools/generate_paste.py` | Генератор блоков для `paste/` |
 | `docs/SETUP.md` | Пошаговая сборка в UEFN: Island Settings, устройства, пост-обработка, свет, чек-лист |
 
 ## Быстрый старт
