@@ -174,7 +174,7 @@ bodycam_rounds_manager := class(creative_device, bodycam_mode):
         Character.SetHealth(MaxHealth)
         Character.SetShield(0.0)
 
-    GetTeamIndex(InAgent:agent):int =
+    GetTeamIndex(InAgent:agent)<transacts>:int =
         TeamCollection := GetPlayspace().GetTeamCollection()
         var Result : int = -1
         for (Index -> Team : TeamCollection.GetTeams(), TeamCollection.IsOnTeam[InAgent, Team]):

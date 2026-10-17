@@ -4,6 +4,7 @@
 # Снаряжение выбирается в меню на экране «НЕТ СИГНАЛА» и выдаётся при возрождении.
 
 using { /Fortnite.com/Devices }
+using { /Verse.org/Simulation }
 
 bodycam_deathmatch_manager := class(bodycam_respawn_mode):
 
@@ -22,7 +23,7 @@ bodycam_deathmatch_manager := class(bodycam_respawn_mode):
 
     ModeTitle<override>():string = "DEATHMATCH"
 
-    GetKills(P:player):int =
+    GetKills(P:player)<transacts>:int =
         if (Value := Kills[P]) then Value else 0
 
     PickerOptions<override>():[]string = LoadoutNames

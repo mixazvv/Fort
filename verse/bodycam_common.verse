@@ -2,6 +2,7 @@
 
 using { /Fortnite.com/Devices }
 using { /Verse.org/Colors }
+using { /Verse.org/Simulation }
 
 # Превращает строку в message для виджетов UI.
 BodycamText<localizes>(S:string):message = "{S}"

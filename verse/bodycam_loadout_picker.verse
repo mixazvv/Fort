@@ -5,6 +5,7 @@
 using { /Fortnite.com/UI }
 using { /UnrealEngine.com/Temporary/UI }
 using { /UnrealEngine.com/Temporary/SpatialMath }
+using { /Verse.org/Simulation }
 
 # Verse не умеет замыкания, поэтому каждая кнопка хранит свой индекс в отдельном объекте.
 bodycam_loadout_button := class:
@@ -24,7 +25,7 @@ bodycam_loadout_picker := class:
 
     TitleText : text_block = text_block{DefaultTextColor := BodycamWhite}
 
-    HasOptions():logic =
+    HasOptions()<transacts>:logic =
         if (Names.Length > 0) then true else false
 
     SelectedName():string =
